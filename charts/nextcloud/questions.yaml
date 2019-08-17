@@ -34,38 +34,38 @@ questions:
     label: MariaDB container image tag
 
 # SECRETS
-- variable: secret.mariadbRootPassword
+- variable: secret.mariadbRootPasswordSecret
   required: true
-  description: "Root password for MariaDB"
+  description: "Secret name for: Root password for MariaDB"
   label: Root password for MariaDB
   type: password
   group: "Secrets"
-- variable: secret.mariadbUsername
+- variable: secret.mariadbUsernameSecret
   required: true
-  description: "Username for MariaDB (used by nextcloud)"
+  description: "Secret name for: Username for MariaDB (used by nextcloud)"
   label: Username for MariaDB (used by nextcloud)
   type: password
   group: "Secrets"
-- variable: secret.mariadbPassword
+- variable: secret.mariadbPasswordSecret
   required: true
-  description: "Password for MariaDB (used by nextcloud)"
+  description: "Secret name for: Password for MariaDB (used by nextcloud)"
   label: Password for MariaDB (used by nextcloud)
   type: password
   group: "Secrets"
-- variable: secret.mariadbDatabase
+- variable: secret.mariadbDatabaseSecret
   required: true
-  description: "Nextcloud database mame"
+  description: "Secret name for: Nextcloud database mame"
   label: Nextcloud database mame
   type: password
   group: "Secrets"
 
-# # STORAGE
-# - variable: volume.pvcName
-#   required: true
-#   description: "Persistent volume claim"
-#   label: Persistent volume claim
-#   type: pvc
-#   group: "Storage"
+# STORAGE
+- variable: volume.pvcName
+  required: true
+  description: "Persistent volume claim"
+  label: Persistent volume claim
+  type: string
+  group: "Storage"
 
 # CRONJOB
 - variable: cron.nextcloud

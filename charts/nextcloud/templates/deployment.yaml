@@ -36,22 +36,22 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: mariadb-secrets
-                key: MARIADB_ROOT_PASSWORD
+                key: {{ .Values.secret.mariadbRootPasswordSecret }}
           - name: MARIADB_USERNAME
             valueFrom:
               secretKeyRef:
                 name: mariadb-secrets
-                key: MARIADB_USERNAME
+                key: {{ .Values.secret.mariadbUsernameSecret }}
           - name: MARIADB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mariadb-secrets
-                key: MARIADB_PASSWORD
+                key: {{ .Values.secret.mariadbPasswordSecret }}
           - name: MARIADB_DATABASE
             valueFrom:
               secretKeyRef:
                 name: mariadb-secrets
-                key: MARIADB_DATABASE
+                key: {{ .Values.secret.mariadbDatabaseSecret }}
           volumeMounts:
           - mountPath: /var/lib/mysql
             name: nextcloud-v

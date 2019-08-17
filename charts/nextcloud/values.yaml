@@ -9,10 +9,10 @@ image:
 
 secret:
   # ENCODE VALUES IN base64 !!!!
-    mariadbRootPassword:
-    mariadbUsername:
-    mariadbPassword:
-    mariadbDatabase:
+    mariadbRootPasswordSecret:
+    mariadbUsernameSecret:
+    mariadbPasswordSecret:
+    mariadbDatabaseSecret:
 
 volume:
   pvcName:
