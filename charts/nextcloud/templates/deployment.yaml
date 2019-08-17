@@ -55,13 +55,13 @@ spec:
           volumeMounts:
           - mountPath: /var/lib/mysql
             name: nextcloud-v
-            subPath: mariadb/mysql
+            subPath: nextcloud/mariadb/mysql
           - mountPath: /etc/mysql/conf.d
             name: nextcloud-v
-            subPath: mariadb/conf.d
+            subPath: nextcloud/mariadb/conf.d
           - mountPath: /var/lib/backup
             name: nextcloud-v
-            subPath: mariadb/backup
+            subPath: nextcloud/mariadb/backup
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: "nextcloud"
@@ -74,7 +74,7 @@ spec:
           volumeMounts:
           - mountPath: /var/www/html
             name: nextcloud-v
-            subPath: nextcloud
+            subPath: nextcloud/nextcloud
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
