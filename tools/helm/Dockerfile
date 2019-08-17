@@ -28,4 +28,4 @@ RUN mkdir -p ~/.helm/plugins \
     && rm -r /tmp/helm-diff /tmp/helm-diff.tgz
 
 WORKDIR /toLint
-CMD /usr/local/bin/helm lint .
+ENTRYPOINT ["/usr/local/bin/helm"]
