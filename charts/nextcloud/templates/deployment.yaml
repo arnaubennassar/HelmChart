@@ -24,7 +24,7 @@ spec:
         persistentVolumeClaim:
           claimName: {{ .Values.volume.pvcName }}
       containers:
-        - name: "{{ .Chart.Name }}-mariadb"
+        - name: "mariadb"
           image: "{{ .Values.image.mariadb }}:{{ .Values.image.mariadbTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -64,7 +64,7 @@ spec:
             subPath: mariadb/backup
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        - name: "{{ .Chart.Name }}-nextcloud"
+        - name: "nextcloud"
           image: "{{ .Values.image.nextcloud }}:{{ .Values.image.nextcloudTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
