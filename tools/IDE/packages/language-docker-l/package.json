@@ -1,0 +1,45 @@
+{
+  "_from": "https://www.atom.io/api/packages/language-docker-l/versions/0.2.3/tarball",
+  "_id": "language-docker-l@0.2.3",
+  "_inBundle": false,
+  "_integrity": "sha512-/K6LF+Bm2XOEs66ZgQCg91BGc1AZhi6Sr4Rb8t3OnIsYyCX9ArI/hFZnQOIz/JBwVwW2Pd9kRp5YY0xbrRgEOA==",
+  "_location": "/language-docker-l",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "https://www.atom.io/api/packages/language-docker-l/versions/0.2.3/tarball",
+    "rawSpec": "https://www.atom.io/api/packages/language-docker-l/versions/0.2.3/tarball",
+    "saveSpec": "https://www.atom.io/api/packages/language-docker-l/versions/0.2.3/tarball",
+    "fetchSpec": "https://www.atom.io/api/packages/language-docker-l/versions/0.2.3/tarball"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://www.atom.io/api/packages/language-docker-l/versions/0.2.3/tarball",
+  "_shasum": "8c436b4bf8432aa93bced7c8ac97abe5b0bb486a",
+  "_spec": "https://www.atom.io/api/packages/language-docker-l/versions/0.2.3/tarball",
+  "_where": "/tmp/apm-install-dir-119717-799-1kehxlh.qsn8",
+  "bugs": {
+    "url": "https://github.com/ZombyMedia/language_docker/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Syntax highlighting for Docker",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/ZombyMedia/language_docker#readme",
+  "keywords": [
+    "language",
+    "grammar"
+  ],
+  "license": "UCOP",
+  "name": "language-docker-l",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://ZombyMedia:Zomby.0207@github.com/ZombyMedia/language_docker.git"
+  },
+  "version": "0.2.3"
+}

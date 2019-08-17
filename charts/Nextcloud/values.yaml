@@ -25,21 +25,21 @@ service:
   nextcloudPort: 80                               # SHOULD BE SAME VARIABLE?
   mariadbPort: 3306
 
-# ingress:
-#   #
-#   enabled: true
-#   annotations:
-#     kubernetes.io/ingress.class: traefik
-#   hosts:
-#     - host: cloud.nau.qhigh.com
-#       paths:
-#       - path: /
-#         servicePort: 80                           # SHOULD BE SAME VARIABLE?
-#
-#   tls: []
-#   #  - secretName: chart-example-tls
-#   #    hosts:
-#   #      - chart-example.local
+ingress:
+  #
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  hosts:
+    - host: cloud.nau.qhigh.com
+      paths:
+      - path: /
+        servicePort: 80                           # SHOULD BE SAME VARIABLE?
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 cron:
   nextcloud: "10 * * * *"
