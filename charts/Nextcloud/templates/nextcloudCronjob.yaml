@@ -1,0 +1,36 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "chart.name" . }}
+    helm.sh/chart: {{ include "chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  schedule: "{{ .Values.cron.nextcloud }}"
+  jobTemplate:
+    spec:
+      # successfulJobsHistoryLimit: 1
+      # failedJobsHistoryLimit: 2
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: nextcloud-cronjob
+            image: "{{ .Values.image.nextcloud }}"
+            args:
+            - su
+            - -s
+            - /bin/bash
+            - -c
+            - "php cron.php"
+            - www-data
+            volumeMounts:
+            - mountPath: /var/www/html
+              name: nextcloud-v
+              subPath: nextcloud
+          volumes:
+          - name: nextcloud-v
+            persistentVolumeClaim:
+              claimName: {{ .Values.volume.pvcName }}

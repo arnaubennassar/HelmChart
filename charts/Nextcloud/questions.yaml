@@ -1,0 +1,77 @@
+categories:
+- cloud
+questions:
+# IMAGE
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  # Nextcloud
+  - variable: image.nextcloud
+    default: "nextcloud"
+    description: "Nextcloud container image"
+    type: string
+    label: Nextcloud container image
+  - variable: image.nextcloudTag
+    default: "stable-apache"
+    description: "Nextcloud container image tag"
+    type: string
+    label: Nextcloud container image tag
+  # MariaDB
+  - variable: image.mariadb
+    default: "webhippie/mariadb"
+    description: "MariaDB container image"
+    type: string
+    label: MariaDB container image
+  - variable: image.nextcloudTag
+    default: "latest"
+    description: "MariaDB container image tag"
+    type: string
+    label: MariaDB container image tag
+
+# SECRETS
+- variable: secret.mariadbRootPassword
+  required: true
+  description: "Root password for MariaDB"
+  label: Root password for MariaDB
+  type: password
+  group: "Secrets"
+- variable: secret.mariadbUsername
+  required: true
+  description: "Username for MariaDB (used by nextcloud)"
+  label: Username for MariaDB (used by nextcloud)
+  type: password
+  group: "Secrets"
+- variable: secret.mariadbPassword
+  required: true
+  description: "Password for MariaDB (used by nextcloud)"
+  label: Password for MariaDB (used by nextcloud)
+  type: password
+  group: "Secrets"
+- variable: secret.mariadbDatabase
+  required: true
+  description: "Nextcloud database mame"
+  label: Nextcloud database mame
+  type: password
+  group: "Secrets"
+
+# STORAGE
+- variable: volume.pvcName
+  required: true
+  description: "Persistent volume claim"
+  label: Persistent volume claim
+  type: pvc
+  group: "Storage"
+
+# CRONJOB
+- variable: cron.nextcloud
+  required: true
+  default: "10 * * * *"
+  description: "Cronjob expression to execute nextcloud update (it will refresh news, ...)"
+  label: Cronjob expression to execute nextcloud update (it will refresh news, ...)
+  type: string
+  group: "Cronjob"

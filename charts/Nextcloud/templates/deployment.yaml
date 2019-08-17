@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "chart.name" . }}
+    helm.sh/chart: {{ include "chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "chart.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "chart.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      volumes:
+      - name: nextcloud-v
+        persistentVolumeClaim:
+          claimName: {{ .Values.volume.pvcName }}
+      containers:
+        - name: "{{ .Chart.Name }}-mariadb"
+          image: "{{ .Values.image.{{ .Values.image.nemariadbxtcloud }} }}:{{ .Values.image.mariadbTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3306
+              protocol: TCP
+          env:
+          - name: MARIADB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mariadb-secrets
+                key: MARIADB_ROOT_PASSWORD
+          - name: MARIADB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mariadb-secrets
+                key: MARIADB_USERNAME
+          - name: MARIADB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mariadb-secrets
+                key: MARIADB_PASSWORD
+          - name: MARIADB_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: mariadb-secrets
+                key: MARIADB_DATABASE
+          volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: nextcloud-v
+            subPath: mariadb/mysql
+          - mountPath: /etc/mysql/conf.d
+            name: nextcloud-v
+            subPath: mariadb/conf.d
+          - mountPath: /var/lib/backup
+            name: nextcloud-v
+            subPath: mariadb/backup
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        - name: "{{ .Chart.Name }}-nextcloud"
+          image: "{{ .Values.image.nextcloud }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+          - mountPath: /var/www/html
+            name: nextcloud-v
+            subPath: nextcloud
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
