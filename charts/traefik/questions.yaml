@@ -30,7 +30,7 @@ questions:
   type: string
   group: "Configuration"
 # SECRET
-- variable: nodeName
+- variable: password
   required: true
   description: "secret name of a password"
   label: secret name of a password
