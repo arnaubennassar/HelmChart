@@ -40,25 +40,25 @@ questions:
   label: Name of the secret to be used
   type: string
   group: "Secrets"
-- variable: secret.mariadbRootPasswordSecret
+- variable: secret.mariadbRootPasswordKey
   required: true
   description: "Secret key for: Root password for MariaDB"
   label: Root password for MariaDB
   type: string
   group: "Secrets"
-- variable: secret.mariadbUsernameSecret
+- variable: secret.mariadbUsernameKey
   required: true
   description: "Secret key for: Username for MariaDB (used by nextcloud)"
   label: Username for MariaDB (used by nextcloud)
   type: string
   group: "Secrets"
-- variable: secret.mariadbPasswordSecret
+- variable: secret.mariadbPasswordKey
   required: true
   description: "Secret key for: Password for MariaDB (used by nextcloud)"
   label: Password for MariaDB (used by nextcloud)
   type: string
   group: "Secrets"
-- variable: secret.mariadbDatabaseSecret
+- variable: secret.mariadbDatabaseKey
   required: true
   description: "Secret key for: Nextcloud database mame"
   label: Nextcloud database mame
