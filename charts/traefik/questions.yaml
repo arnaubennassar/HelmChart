@@ -29,10 +29,3 @@ questions:
   label: name of a PVC used to store tls certificates
   type: string
   group: "Configuration"
-# SECRET
-- variable: password
-  required: true
-  description: "secret name of a password"
-  label: secret name of a password
-  type: string
-  group: "Configuration"
