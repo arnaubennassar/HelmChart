@@ -1,0 +1,27 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: traefik-https-cfg
+  namespace: kube-system
+data:
+  traefik.toml: |
+    # traefik.toml
+    logLevel = "INFO"
+    defaultEntryPoints = ["http","https"]
+    [entryPoints]
+      [entryPoints.http]
+        address = ":80"
+        [entryPoints.http.redirect]
+          entryPoint = "https"
+      [entryPoints.https]
+        address = ":443"
+        [entryPoints.https.tls]
+    [acme]
+      email = {{ .Values.email }}
+      storage = "/etc/traefik/acme2.json"
+      acmeLogging = true
+      entryPoint = "https"
+      OnHostRule = true
+      # caServer = "https://acme-v01.api.letsencrypt.org/directory"
+      [acme.httpChallenge]
+        entryPoint="http"

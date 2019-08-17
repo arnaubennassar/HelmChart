@@ -1,0 +1,31 @@
+categories:
+- LB
+questions:
+# EMAIL
+- variable: email
+  required: true
+  description: "contact email for let's encrypt bot"
+  label: contact email for let's encrypt bot
+  type: string
+  group: "Configuration"
+# NODE NAME
+- variable: nodeName
+  required: true
+  description: "node name in wich the LB will be deployed"
+  label: node name in wich the LB will be deployed
+  type: string
+  group: "Configuration"
+# PVC
+- variable: pvcName
+  required: true
+  description: "name of a PVC used to store tls certificates"
+  label: name of a PVC used to store tls certificates
+  type: string
+  group: "Configuration"
+# SECRET
+- variable: nodeName
+  required: true
+  description: "secret name of a password"
+  label: secret name of a password
+  type: string
+  group: "Configuration"

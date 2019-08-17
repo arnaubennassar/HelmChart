@@ -1,0 +1,11 @@
+# contact email for let's encrypt bot
+email:
+
+# node name in wich the LB will be deployed
+nodeName:
+
+# name of a PVC used to store tls certificates
+pvcName:
+
+# secret name of a password
+password:
