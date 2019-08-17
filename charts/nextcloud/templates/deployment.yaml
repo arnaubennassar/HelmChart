@@ -40,17 +40,17 @@ spec:
           - name: MARIADB_USERNAME
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.secret.nextcloudSecret }}
+                name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbUsernameKey }}
           - name: MARIADB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.secret.nextcloudSecret }}
+                name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbPasswordKey }}
           - name: MARIADB_DATABASE
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.secret.nextcloudSecret }}
+                name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbDatabaseKey }}
           volumeMounts:
           - mountPath: /var/lib/mysql
