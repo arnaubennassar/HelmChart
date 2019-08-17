@@ -1,6 +1,13 @@
 categories:
 - LB
 questions:
+# NAMESPACE
+- variable: namespace
+  required: true
+  description: "namespace"
+  label: namespace
+  type: string
+  group: "Configuration"
 # EMAIL
 - variable: email
   required: true
