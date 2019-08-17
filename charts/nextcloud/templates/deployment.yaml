@@ -35,23 +35,23 @@ spec:
           - name: MARIADB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mariadb-secrets
-                key: {{ .Values.secret.mariadbRootPasswordSecret }}
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbRootPasswordKey }}
           - name: MARIADB_USERNAME
             valueFrom:
               secretKeyRef:
-                name: mariadb-secrets
-                key: {{ .Values.secret.mariadbUsernameSecret }}
+                name: {{ .Values.secret.nextcloudSecret }}
+                key: {{ .Values.secret.mariadbUsernameKey }}
           - name: MARIADB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mariadb-secrets
-                key: {{ .Values.secret.mariadbPasswordSecret }}
+                name: {{ .Values.secret.nextcloudSecret }}
+                key: {{ .Values.secret.mariadbPasswordKey }}
           - name: MARIADB_DATABASE
             valueFrom:
               secretKeyRef:
-                name: mariadb-secrets
-                key: {{ .Values.secret.mariadbDatabaseSecret }}
+                name: {{ .Values.secret.nextcloudSecret }}
+                key: {{ .Values.secret.mariadbDatabaseKey }}
           volumeMounts:
           - mountPath: /var/lib/mysql
             name: nextcloud-v

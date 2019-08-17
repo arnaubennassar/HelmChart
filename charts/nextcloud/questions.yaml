@@ -34,29 +34,35 @@ questions:
     label: MariaDB container image tag
 
 # SECRETS
+- variable: secret.name
+  required: true
+  description: "Name of the secret to be used"
+  label: Name of the secret to be used
+  type: string
+  group: "Secrets"
 - variable: secret.mariadbRootPasswordSecret
   required: true
-  description: "Secret name for: Root password for MariaDB"
+  description: "Secret key for: Root password for MariaDB"
   label: Root password for MariaDB
-  type: password
+  type: string
   group: "Secrets"
 - variable: secret.mariadbUsernameSecret
   required: true
-  description: "Secret name for: Username for MariaDB (used by nextcloud)"
+  description: "Secret key for: Username for MariaDB (used by nextcloud)"
   label: Username for MariaDB (used by nextcloud)
-  type: password
+  type: string
   group: "Secrets"
 - variable: secret.mariadbPasswordSecret
   required: true
-  description: "Secret name for: Password for MariaDB (used by nextcloud)"
+  description: "Secret key for: Password for MariaDB (used by nextcloud)"
   label: Password for MariaDB (used by nextcloud)
-  type: password
+  type: string
   group: "Secrets"
 - variable: secret.mariadbDatabaseSecret
   required: true
-  description: "Secret name for: Nextcloud database mame"
+  description: "Secret key for: Nextcloud database mame"
   label: Nextcloud database mame
-  type: password
+  type: string
   group: "Secrets"
 
 # STORAGE
