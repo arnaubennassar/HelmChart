@@ -59,13 +59,13 @@ questions:
   type: password
   group: "Secrets"
 
-# STORAGE
-- variable: volume.pvcName
-  required: true
-  description: "Persistent volume claim"
-  label: Persistent volume claim
-  type: pvc
-  group: "Storage"
+# # STORAGE
+# - variable: volume.pvcName
+#   required: true
+#   description: "Persistent volume claim"
+#   label: Persistent volume claim
+#   type: pvc
+#   group: "Storage"
 
 # CRONJOB
 - variable: cron.nextcloud
