@@ -65,7 +65,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: "{{ .Chart.Name }}-nextcloud"
-          image: "{{ .Values.image.nextcloud }}"
+          image: "{{ .Values.image.nextcloud }}:{{ .Values.image.nextcloudTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

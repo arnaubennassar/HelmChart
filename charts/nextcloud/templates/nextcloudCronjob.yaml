@@ -18,7 +18,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: nextcloud-cronjob
-            image: "{{ .Values.image.nextcloud }}"
+            image: "{{ .Values.image.nextcloud }}:{{ .Values.image.nextcloudTag }}"
             args:
             - su
             - -s
