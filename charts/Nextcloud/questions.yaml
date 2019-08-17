@@ -27,7 +27,7 @@ questions:
     description: "MariaDB container image"
     type: string
     label: MariaDB container image
-  - variable: image.nextcloudTag
+  - variable: image.mariadbTag
     default: "latest"
     description: "MariaDB container image tag"
     type: string
