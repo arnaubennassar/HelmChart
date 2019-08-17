@@ -13,4 +13,4 @@ spec:
       - path: /
         backend:
           serviceName: traefik-ingress-controller-https
-          servicePort: 80
+          servicePort: 8888
