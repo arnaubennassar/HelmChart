@@ -26,6 +26,9 @@ spec:
             - -c
             - "php cron.php"
             - www-data
+            ports:
+            - containerPort: 80
+              protocol: TCP
             volumeMounts:
             - mountPath: /var/www/html
               name: nextcloud-v
