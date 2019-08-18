@@ -16,7 +16,8 @@ spec:
           containers:
           - name: nextcloud-cronjob
             image: hectormolinero/curl
-            command:
+            command: [ "curl" ]
+            args:
             - "--fail"
             - "-L"
-            - "https://{{ .Values.host }}/cron.php"
+            - "http://{{ .Values.host }}/cron.php"
