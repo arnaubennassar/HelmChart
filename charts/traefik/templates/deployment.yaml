@@ -70,7 +70,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   ports:
-  - port: 80
+  - port: 8888
     targetPort: 8888
   selector:
     k8s-app: traefik-ingress-controller-https
