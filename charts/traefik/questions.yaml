@@ -29,3 +29,29 @@ questions:
   label: name of a PVC used to store tls certificates
   type: string
   group: "Configuration"
+
+# CREDENTIALS
+- variable: secret.name
+  required: true
+  description: "Secret name containig user, password and record for changeip.com"
+  label: Secret name containig user, password and record for changeip.com
+  type: string
+  group: "Credentials"
+- variable: secret.userKey
+  required: true
+  description: "Key of the secret that contains the user name for changeip.com"
+  label: Key of the secret that contains the user name for changeip.com
+  type: string
+  group: "Credentials"
+- variable: secret.passwordKey
+  required: true
+  description: "Key of the secret that contains the password for changeip.com"
+  label: Key of the secret that contains the password for changeip.com
+  type: string
+  group: "Credentials"
+- variable: secret.recordKey
+  required: true
+  description: "Key of the secret that contains the record to be updated in for changeip.com"
+  label: Key of the secret that contains the record to be updated in for changeip.com
+  type: string
+  group: "Credentials"

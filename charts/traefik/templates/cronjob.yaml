@@ -1,0 +1,33 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: changeip-cronjob
+  namespace: kube-system
+spec:
+  schedule: "10 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          successfulJobsHistoryLimit: 1
+          failedJobsHistoryLimit: 2
+          restartPolicy: Never
+          containers:
+          - name: changeip-image
+            image: arnaubennassar/changeip-updater
+            env:
+            - name: CHANGEIP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: {{ .Values.secret.userKey }}
+            - name: CHANGEIP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: {{ .Values.secret.passwordKey }}
+            - name: CHANGEIP_RECORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.name }}
+                  key: {{ .Values.secret.recordKey }}

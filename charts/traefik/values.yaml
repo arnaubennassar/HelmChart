@@ -8,3 +8,9 @@ nodeName:
 
 # name of a PVC used to store tls certificates
 pvcName:
+
+# credentials
+secret:
+  userKey:
+  passwordKey:
+  recordKey:
