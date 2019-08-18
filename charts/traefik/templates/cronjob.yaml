@@ -2,7 +2,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: changeip-cronjob
-  namespace: kube-system
+  namespace: {{ .Values.namespace }}
 spec:
   schedule: {{ .Values.cron }}
   jobTemplate:
