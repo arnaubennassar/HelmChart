@@ -1,9 +1,9 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Values.appName }}-cron
+  name: {{ .Values.appName }}
   labels:
-    k8s-app: {{ .Values.appName }}-cron
+    k8s-app: {{ .Values.appName }}
 spec:
   schedule: "{{ .Values.cron }}"
   jobTemplate:
@@ -15,19 +15,9 @@ spec:
           restartPolicy: Never
           containers:
           - name: nextcloud-cronjob
-            image: "{{ .Values.image.nextcloud }}:{{ .Values.image.nextcloudTag }}"
+            image: alpine
+            command: [ "curl" ]
             args:
-            - su
-            - -s
-            - /bin/bash
-            - -c
-            - "php cron.php"
-            - www-data
-            volumeMounts:
-            - mountPath: /var/www/html
-              name: nextcloud-v
-              subPath: nextcloud/nextcloud
-          volumes:
-          - name: nextcloud-v
-            persistentVolumeClaim:
-              claimName: {{ .Values.pvcName }}
+            - "--fail"
+            - "-L"
+            - "https://{{ .Values.host }}/cron.php"
