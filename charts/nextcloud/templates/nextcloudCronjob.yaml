@@ -15,7 +15,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: nextcloud-cronjob
-            image: alpine
+            image: debian:buster-slim
             command: [ "curl" ]
             args:
             - "--fail"
