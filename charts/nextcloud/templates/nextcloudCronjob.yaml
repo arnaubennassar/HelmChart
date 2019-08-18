@@ -3,10 +3,7 @@ kind: CronJob
 metadata:
   name: {{ include "chart.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "chart.name" . }}
-    helm.sh/chart: {{ include "chart.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    k8s-app: {{ include "chart.fullname" . }}
 spec:
   schedule: "{{ .Values.cron.nextcloud }}"
   jobTemplate:
@@ -26,9 +23,6 @@ spec:
             - -c
             - "php cron.php"
             - www-data
-            ports:
-            - containerPort: 80
-              protocol: TCP
             volumeMounts:
             - mountPath: /var/www/html
               name: nextcloud-v
