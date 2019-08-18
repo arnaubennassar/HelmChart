@@ -11,8 +11,8 @@ spec:
   schedule: "{{ .Values.cron.nextcloud }}"
   jobTemplate:
     spec:
-      # successfulJobsHistoryLimit: 1
-      # failedJobsHistoryLimit: 2
+      successfulJobsHistoryLimit: 1
+      failedJobsHistoryLimit: 2
       template:
         spec:
           restartPolicy: Never
