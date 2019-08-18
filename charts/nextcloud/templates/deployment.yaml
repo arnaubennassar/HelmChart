@@ -57,8 +57,6 @@ spec:
           - mountPath: /var/lib/backup
             name: nextcloud-v
             subPath: nextcloud/mariadb/backup
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
         - name: "nextcloud"
           image: "{{ .Values.image.nextcloud }}:{{ .Values.image.nextcloudTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
