@@ -62,7 +62,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: nextcloud
-              containerPort: 7777
+              containerPort: 80
           volumeMounts:
           - mountPath: /var/www/html
             name: nextcloud-v
