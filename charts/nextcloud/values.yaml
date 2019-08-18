@@ -9,16 +9,13 @@ image:
 
 appName: nextcloud
 secret:
-    name:
-    mariadbRootPasswordKey:
-    mariadbUsernameKey:
-    mariadbPasswordKey:
-    mariadbDatabaseKey:
+  name:
+  mariadbRootPasswordKey:
+  mariadbUsernameKey:
+  mariadbPasswordKey:
+  mariadbDatabaseKey:
 
 pvcName:
-
-nameOverride: ""
-fullnameOverride: ""
 
 host: cloud.nau.qhigh.com
 
