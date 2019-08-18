@@ -1,9 +1,9 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Values.appName }}
+  name: {{ .Values.appName }}-cron
   labels:
-    k8s-app: {{ .Values.appName }}
+    k8s-app: {{ .Values.appName }}-cron
 spec:
   schedule: "{{ .Values.cron }}"
   jobTemplate:
