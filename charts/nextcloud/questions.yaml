@@ -66,7 +66,7 @@ questions:
   group: "Secrets"
 
 # STORAGE
-- variable: volume.pvcName
+- variable: pvcName
   required: true
   description: "Persistent volume claim"
   label: Persistent volume claim
@@ -74,7 +74,7 @@ questions:
   group: "Storage"
 
 # CRONJOB
-- variable: cron.nextcloud
+- variable: cron
   required: true
   default: "10 * * * *"
   description: "Cronjob expression to execute nextcloud update (it will refresh news, ...)"

@@ -6,9 +6,9 @@ metadata:
   name: {{ .Values.appName }}
 spec:
   ports:
-  - port: {{ .Values.service.nextcloudPort }}
+  - port: 80
     targetPort: 80
-  - port: {{ .Values.service.mariadbPort }}
+  - port: 3306
     targetPort: 3306
   selector:
     k8s-app: {{ .Values.appName }}
