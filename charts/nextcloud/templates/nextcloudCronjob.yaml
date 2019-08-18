@@ -20,4 +20,4 @@ spec:
             - "/curl"
             - "--fail"
             - "-L"
-            - "10.42.2.15/cron.php"
+            - "http://{{ .Values.host }}/cron.php"
