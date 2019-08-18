@@ -61,3 +61,4 @@ questions:
   label: Cron expression to schedule the changeip IP refresh
   type: string
   group: "Schedule"
+  default: "10 * * * *"
