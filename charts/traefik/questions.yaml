@@ -55,3 +55,9 @@ questions:
   label: Key of the secret that contains the record to be updated in for changeip.com
   type: string
   group: "Credentials"
+# CRONJOB
+- variable: cron
+  description: "Cron expression to schedule the changeip IP refresh"
+  label: Cron expression to schedule the changeip IP refresh
+  type: string
+  group: "Schedule"

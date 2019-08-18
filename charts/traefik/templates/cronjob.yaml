@@ -4,7 +4,7 @@ metadata:
   name: changeip-cronjob
   namespace: kube-system
 spec:
-  schedule: "10 * * * *"
+  schedule: {{ .Values.cron }}
   jobTemplate:
     spec:
       template:
