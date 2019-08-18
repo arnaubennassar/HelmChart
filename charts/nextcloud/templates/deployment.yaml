@@ -24,7 +24,7 @@ spec:
           image: "{{ .Values.image.mariadb }}:{{ .Values.image.mariadbTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
+            - name: mariadb
               containerPort: 3306
           env:
           - name: MARIADB_ROOT_PASSWORD
@@ -61,7 +61,7 @@ spec:
           image: "{{ .Values.image.nextcloud }}:{{ .Values.image.nextcloudTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
+            - name: nextcloud
               containerPort: 80
           volumeMounts:
           - mountPath: /var/www/html
