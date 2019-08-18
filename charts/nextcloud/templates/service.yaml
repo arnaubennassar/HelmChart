@@ -2,8 +2,8 @@ kind: Service
 apiVersion: v1
 metadata:
   labels:
-    k8s-app: {{ include "chart.fullname" . }}
-  name: {{ include "chart.fullname" . }}
+    k8s-app: {{ .Values.appName }}
+  name: {{ .Values.appName }}
 spec:
   ports:
   - port: {{ .Values.service.nextcloudPort }}
@@ -11,4 +11,4 @@ spec:
   - port: {{ .Values.service.mariadbPort }}
     targetPort: 3306
   selector:
-    k8s-app: {{ include "chart.fullname" . }}
+    k8s-app: {{ .Values.appName }}

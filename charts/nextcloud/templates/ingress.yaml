@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ include "chart.fullname" . }}
+  name: {{ .Values.appName }}
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
@@ -11,5 +11,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{ include "chart.fullname" . }}
+          serviceName: {{ .Values.appName }}
           servicePort: 80

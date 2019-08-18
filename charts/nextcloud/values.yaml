@@ -7,8 +7,8 @@ image:
   mariadbTag: latest
   pullPolicy: IfNotPresent
 
+appName: nextcloud
 secret:
-  # ENCODE VALUES IN base64 !!!!
     name:
     mariadbRootPasswordKey:
     mariadbUsernameKey:
@@ -26,12 +26,7 @@ service:
   nextcloudPort: 80                               # SHOULD BE SAME VARIABLE?
   mariadbPort: 3306
 
-host: cloud.nau.qhigh.com                        # SHOULD BE SAME VARIABLE?
-
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+host: cloud.nau.qhigh.com
 
 cron:
   nextcloud: "10 * * * *"

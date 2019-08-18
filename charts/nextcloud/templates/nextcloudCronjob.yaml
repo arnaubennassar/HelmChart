@@ -1,9 +1,9 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ include "chart.fullname" . }}
+  name: {{ .Values.appName }}
   labels:
-    k8s-app: {{ include "chart.fullname" . }}
+    k8s-app: {{ .Values.appName }}
 spec:
   schedule: "{{ .Values.cron.nextcloud }}"
   jobTemplate:
