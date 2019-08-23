@@ -1,0 +1,142 @@
+categories:
+- media
+- streaming
+questions:
+# IMAGE
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  # transmission
+  - variable: image.transmission
+    default: "linuxserver/transmission"
+    description: "transmission container image"
+    type: string
+    label: transmission container image
+  - variable: image.transmissionTag
+    default: "latest"
+    description: "transmission container image tag"
+    type: string
+    label: transmission container image tag
+  # sonarr
+  - variable: image.sonarr
+    default: "linuxserver/sonarr"
+    description: "sonarr container image"
+    type: string
+    label: sonarr container image
+  - variable: image.sonarrTag
+    default: "latest"
+    description: "sonarr container image tag"
+    type: string
+    label: sonarr container image tag
+  # radarr
+  - variable: image.radarr
+    default: "linuxserver/radarr"
+    description: "radarr container image"
+    type: string
+    label: radarr container image
+  - variable: image.radarrTag
+    default: "latest"
+    description: "radarr container image tag"
+    type: string
+    label: radarr container image tag
+  # bazarr
+  - variable: image.bazarr
+    default: "linuxserver/bazarr"
+    description: "bazarr container image"
+    type: string
+    label: bazarr container image
+  - variable: image.bazarrTag
+    default: "latest"
+    description: "bazarr container image tag"
+    type: string
+    label: bazarr container image tag
+  # jackett
+  - variable: image.jackett
+    default: "linuxserver/jackett"
+    description: "jackett container image"
+    type: string
+    label: jackett container image
+  - variable: image.jackettTag
+    default: "latest"
+    description: "jackett container image tag"
+    type: string
+    label: jackett container image tag
+  # jellyfin
+  - variable: image.jellyfin
+    default: "linuxserver/jellyfin"
+    description: "jellyfin container image"
+    type: string
+    label: jellyfin container image
+  - variable: image.jellyfinTag
+    default: "latest"
+    description: "jellyfin container image tag"
+    type: string
+    label: jellyfin container image tag
+# SECRETS
+- variable: secret.name
+  required: true
+  description: "Name of the secret to be used"
+  label: Name of the secret to be used
+  type: string
+  group: "Secrets"
+- variable: secret.transmission.userKey
+  required: true
+  description: "Secret key for: Transmission username"
+  label: Secret key for: Transmission username
+  type: string
+  group: "Secrets"
+- variable: secret.transmission.passKey
+  required: true
+  description: "Secret key for: Transmission password"
+  label: Secret key for: Transmission password
+  type: string
+  group: "Secrets"
+# STORAGE
+- variable: pvcName
+  required: true
+  description: "Persistent volume claim"
+  label: Persistent volume claim
+  type: string
+  group: "Storage"
+# HOSTS
+- variable: host.transmission
+  required: true
+  description: "URL for transmission"
+  label: URL for transmission
+  type: string
+  group: "Hosts"
+- variable: host.sonarr
+  required: true
+  description: "URL for sonarr"
+  label: URL for sonarr
+  type: string
+  group: "Hosts"
+- variable: host.radarr
+  required: true
+  description: "URL for radarr"
+  label: URL for radarr
+  type: string
+  group: "Hosts"
+- variable: host.bazarr
+  required: true
+  description: "URL for bazarr"
+  label: URL for bazarr
+  type: string
+  group: "Hosts"
+- variable: host.jellyfin
+  required: true
+  description: "URL for jellyfin"
+  label: URL for jellyfin
+  type: string
+  group: "Hosts"
+- variable: host.jackett
+  required: true
+  description: "URL for jackett"
+  label: URL for jackett
+  type: string
+  group: "Hosts"

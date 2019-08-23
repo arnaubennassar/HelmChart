@@ -1,0 +1,35 @@
+appName: piflix
+namespace: default
+
+replicaCount: 1
+
+image:
+  jellyfin: linuxserver/jellyfin
+  jellyfinTag: latest
+  jackett: linuxserver/jackett
+  jackettTag: latest
+  sonarr: linuxserver/sonarr
+  sonarrTag: latest
+  radarr: linuxserver/radarr
+  radarrTag: latest
+  bazarr: linuxserver/bazarr
+  bazarrTag: latest
+  transmission: linuxserver/transmission
+  transmissionTag: latest
+  pullPolicy: IfNotPresent
+
+secret:
+  name:
+  transmission:
+    userKey:
+    passKey:
+
+pvcName:
+
+host:
+  transmission:
+  sonarr:
+  radarr:
+  bazarr:
+  jellyfin:
+  jackett:

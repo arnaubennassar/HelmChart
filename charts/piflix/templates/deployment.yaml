@@ -1,0 +1,180 @@
+apiVersion: v1
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    k8s-app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      k8s-app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ .Values.appName }}
+    spec:
+      volumes:
+      - name: piflix-v
+        persistentVolumeClaim:
+          claimName: {{ .Values.pvcName }}
+      containers:
+# TRANSMISSION
+        - name: "transmission"
+          image: "{{ .Values.image.transmission }}:{{ .Values.image.transmissionTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: transmission
+              containerPort: 9091
+          volumeMounts:
+          - mountPath: /config
+            name: piflix-v
+            subPath: piflix/transmission/config
+          - mountPath: /downloads
+            name: piflix-v
+            subPath: piflix/transmission/downloads
+          - mountPath: /watch
+            name: piflix-v
+            subPath: piflix/transmission/watch
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
+          - name: USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.transmission.userKey }}
+          - name: PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.transmission.passKey }}
+# SONARR
+        - name: "sonarr"
+          image: "{{ .Values.image.sonarr }}:{{ .Values.image.sonarrTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: sonarr
+              containerPort: 8989
+          volumeMounts:
+          - mountPath: /config
+            name: piflix-v
+            subPath: piflix/sonarr/config
+          - mountPath: /downloads # Same as deluge
+            name: piflix-v
+            subPath: piflix/transmission/downloads
+          - mountPath: /tv
+            name: piflix-v
+            subPath: piflix/data/series
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
+# RADARR
+        - name: "radarr"
+          image: "{{ .Values.image.radarr }}:{{ .Values.image.radarrTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: radarr
+              containerPort: 7878
+          volumeMounts:
+          - mountPath: /config
+            name: piflix-v
+            subPath: piflix/radarr/config
+          - mountPath: /downloads # Same as deluge
+            name: piflix-v
+            subPath: piflix/transmission/downloads
+          - mountPath: /movies
+            name: piflix-v
+            subPath: piflix/data/movies
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
+# BAZARR
+        - name: "bazarr"
+          image: "{{ .Values.image.bazarr }}:{{ .Values.image.bazarrTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: bazarr
+              containerPort: 6767
+          volumeMounts:
+          - mountPath: /config
+            name: piflix-v
+            subPath: piflix/bazarr/config
+          - mountPath: /movies
+            name: piflix-v
+            subPath: piflix/data/movies
+          - mountPath: /tv
+            name: piflix-v
+            subPath: piflix/data/series
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
+# JELLYFIN
+        - name: "jellyfin"
+          image: "{{ .Values.image.jellyfin }}:{{ .Values.image.jellyfinTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: jellyfin
+              containerPort: 8096
+          volumeMounts:
+          - mountPath: /config
+            name: piflix-v
+            subPath: piflix/jellyfin/config
+          - mountPath: /transcode
+            name: piflix-v
+            subPath: piflix/jellyfin/config
+          - mountPath: /data/movies
+            name: piflix-v
+            subPath: piflix/data/movies
+          - mountPath: /data/tvshows
+            name: piflix-v
+            subPath: piflix/data/series
+          - mountPath: /data/fotos
+            name: piflix-v
+            subPath: piflix/data/fotos
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
+# JACKETT
+        - name: "jackett"
+          image: "{{ .Values.image.jackett }}:{{ .Values.image.jackettTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: jackett
+              containerPort: 9117
+          volumeMounts:
+          - mountPath: /config
+            name: piflix-v
+            subPath: piflix/jackett/config
+          - mountPath: /downloads
+            name: piflix-v
+            subPath: piflix/jackett/downloads
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
