@@ -41,10 +41,10 @@ spec:
           containerPort: 8888
         volumeMounts:
         - mountPath: /etc/traefik
-          subPath: traefik
+          subPath: traefik/cache
           name: traefik-cache
         - mountPath: /config-files
-          subPath: traefik
+          subPath: traefik/config
           name: traefik-config
         args:
         - --web
