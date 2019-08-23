@@ -87,13 +87,13 @@ questions:
 - variable: secret.transmission.userKey
   required: true
   description: "Secret key for: Transmission username"
-  label: Secret key for: Transmission username
+  label: "Secret key for: Transmission username"
   type: string
   group: "Secrets"
 - variable: secret.transmission.passKey
   required: true
   description: "Secret key for: Transmission password"
-  label: Secret key for: Transmission password
+  label: "Secret key for: Transmission password"
   type: string
   group: "Secrets"
 # STORAGE
