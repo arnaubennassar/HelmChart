@@ -39,7 +39,7 @@ spec:
             name: traefik-cache
           - mountPath: /config-files
             subPath: traefik/config
-            name: traefik-config
+            name: traefik-cache
           args:
             - --api
             - --accesslog
