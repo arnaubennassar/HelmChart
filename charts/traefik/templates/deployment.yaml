@@ -28,7 +28,7 @@ spec:
         configMap:
           name: traefik-https-cfg
       containers:
-      - image: traefik
+      - image: traefik:v2.0
         name: traefik-ingress-controller
         ports:
         - name: http
@@ -49,8 +49,8 @@ spec:
         args:
         - --api
         - --accesslog
-        - --entrypoints.web.Address=:8000
-        - --entrypoints.websecure.Address=:4443
+        - --entrypoints.web.Address=:80
+        - --entrypoints.websecure.Address=:443
         - --providers.kubernetescrd
         - --certificatesresolvers.default.acme.tlschallenge
         - --certificatesresolvers.default.acme.email={{ .Values.email }}
