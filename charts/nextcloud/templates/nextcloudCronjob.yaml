@@ -16,9 +16,19 @@ spec:
           restartPolicy: Never
           containers:
           - name: nextcloud-cronjob
-            image: hectormolinero/curl
-            command:
-            - "/curl"
-            - "--fail"
-            - "-L"
-            - "http://{{ .Values.host }}/cron.php"
+            image: "{{ .Values.image.nextcloud }}:{{ .Values.image.nextcloudTag }}"
+            args:
+            - su
+            - -s
+            - /bin/bash
+            - -c
+            - "php cron.php"
+            - www-data
+            volumeMounts:
+            - mountPath: /var/www/html
+              name: nextcloud-v
+              subPath: nextcloud
+          volumes:
+          - name: nextcloud-v
+            persistentVolumeClaim:
+              claimName: {{ .Values.volume.pvcName }}
