@@ -27,7 +27,7 @@ spec:
             volumeMounts:
             - mountPath: /var/www/html
               name: nextcloud-v
-              subPath: nextcloud
+              subPath: nextcloud/nextcloud
           volumes:
           - name: nextcloud-v
             persistentVolumeClaim:
