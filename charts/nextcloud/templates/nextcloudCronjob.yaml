@@ -31,4 +31,4 @@ spec:
           volumes:
           - name: nextcloud-v
             persistentVolumeClaim:
-              claimName: {{ .Values.volume.pvcName }}
+              claimName: {{ .Values.pvcName }}
