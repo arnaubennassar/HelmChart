@@ -50,8 +50,10 @@ spec:
         volumeMounts:
         - mountPath: /etc/traefik
           name: traefik-cache
+          subPath: piflix/sonarr/cache
         - mountPath: /config-files
           name: traefik-config
+          subPath: piflix/sonarr/config
         args:
         - --web
         - --web.address=:8888
