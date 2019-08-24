@@ -1,74 +1,63 @@
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: default
+  name: traefik-ingress-controller
+
+---
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: traefik-ingress-controller-https
-  namespace: {{ .Values.namespace }}
+  namespace: default
+  name: traefik
   labels:
-    k8s-app: traefik-ingress-controller-https
+    app: traefik
+
 spec:
+  volumes:
+  - name: traefik-cache
+    persistentVolumeClaim:
+      claimName: {{ .Values.pvcName }}
   replicas: 1
   selector:
     matchLabels:
-      k8s-app: traefik-ingress-controller-https
+      app: traefik
   template:
     metadata:
       labels:
-        k8s-app: traefik-ingress-controller-https
+        app: traefik
     spec:
-      serviceAccount: traefik
-      hostNetwork: true
       nodeSelector:
         kubernetes.io/hostname: {{ .Values.nodeName }}
-      volumes:
-      - name: traefik-cache
-        persistentVolumeClaim:
-          claimName: {{ .Values.pvcName }}
-      - name: traefik-config
-        configMap:
-          name: traefik-https-cfg
+      serviceAccountName: traefik-ingress-controller
       containers:
-      - image: traefik:v2.0
-        name: traefik-ingress-controller
-        ports:
-        - name: http
-          containerPort: 80
-          hostPort: 80
-        - name: https
-          containerPort: 443
-          hostPort: 443
-        - name: admin
-          containerPort: 8888
-        volumeMounts:
-        - mountPath: /etc/traefik
-          subPath: traefik/cache
-          name: traefik-cache
-        - mountPath: /config-files
-          subPath: traefik/config
-          name: traefik-config
-        args:
-        - --api
-        - --accesslog
-        - --entrypoints.web.Address=:80
-        - --entrypoints.websecure.Address=:443
-        - --providers.kubernetescrd
-        - --certificatesresolvers.default.acme.tlschallenge
-        - --certificatesresolvers.default.acme.email={{ .Values.email }}
-        - --certificatesresolvers.default.acme.storage=/etc/traefik/acme.json
-        # Please note that this is the staging Let's Encrypt server.
-        # Once you get things working, you should remove that whole line altogether.
-        - --certificatesresolvers.default.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
----
-kind: Service
-apiVersion: v1
-metadata:
-  labels:
-    k8s-app: traefik-ingress-controller-https
-  name: traefik-ingress-controller-https
-  namespace: {{ .Values.namespace }}
-spec:
-  ports:
-  - port: 8888
-    targetPort: 8888
-  selector:
-    k8s-app: traefik-ingress-controller-https
+        - name: traefik
+          image: traefik:v2.0
+          volumeMounts:
+          - mountPath: /etc/traefik
+            subPath: traefik/cache
+            name: traefik-cache
+          - mountPath: /config-files
+            subPath: traefik/config
+            name: traefik-config
+          args:
+            - --api
+            - --accesslog
+            - --entrypoints.web.Address=:8888
+            - --entrypoints.websecure.Address=:443
+            - --providers.kubernetescrd
+            - --certificatesresolvers.default.acme.tlschallenge
+            - --certificatesresolvers.default.acme.email=foo@you.com
+            - --certificatesresolvers.default.acme.storage=acme.json
+            # Please note that this is the staging Let's Encrypt server.
+            # Once you get things working, you should remove that whole line altogether.
+            - --certificatesresolvers.default.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+          ports:
+          - name: web
+            containerPort: 80
+            hostPort: 80
+          - name: websecure
+            containerPort: 443
+            hostPort: 443
+          - name: admin
+            containerPort: 8888
