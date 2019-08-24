@@ -14,10 +14,6 @@ metadata:
     app: traefik
 
 spec:
-  volumes:
-  - name: traefik-cache
-    persistentVolumeClaim:
-      claimName: {{ .Values.pvcName }}
   replicas: 1
   selector:
     matchLabels:
@@ -27,6 +23,10 @@ spec:
       labels:
         app: traefik
     spec:
+      volumes:
+      - name: traefik-cache
+        persistentVolumeClaim:
+          claimName: {{ .Values.pvcName }}
       nodeSelector:
         kubernetes.io/hostname: {{ .Values.nodeName }}
       serviceAccountName: traefik-ingress-controller
