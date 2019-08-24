@@ -53,7 +53,6 @@ spec:
           subPath: traefik/cache
         - mountPath: /config-files
           name: traefik-config
-          subPath: traefik/config
         args:
         - --web
         - --web.address=:8888
