@@ -4,10 +4,10 @@ metadata:
   labels:
     k8s-app: traefik-ingress-controller-https
   name: traefik-ingress-controller-https
-  namespace: {{ .Values.namespace }}
+  namespace: kube-system
 spec:
   ports:
-  - port: 8888
+  - port: 80
     targetPort: 8888
   selector:
     k8s-app: traefik-ingress-controller-https

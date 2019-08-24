@@ -2,9 +2,11 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: traefik-ingress-controller-https
-  namespace: {{ .Values.namespace }}
+  namespace: kube-system
   annotations:
     kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/auth-type: basic
+    traefik.ingress.kubernetes.io/auth-secret: generic-password
 spec:
   rules:
   - host: {{ .Values.host }}
@@ -13,6 +15,4 @@ spec:
       - path: /
         backend:
           serviceName: traefik-ingress-controller-https
-          servicePort: 8888
-      tls:
-        certResolver: default
+          servicePort: 80

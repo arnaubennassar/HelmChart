@@ -2,7 +2,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: traefik-https-cfg
-  namespace: {{ .Values.namespace }}
+  namespace: kube-system
 data:
   traefik.toml: |
     # traefik.toml
@@ -17,7 +17,7 @@ data:
         address = ":443"
         [entryPoints.https.tls]
     [acme]
-      email = {{ .Values.email }}
+      email = "{{ .Values.email }}"
       storage = "/etc/traefik/acme2.json"
       acmeLogging = true
       entryPoint = "https"
