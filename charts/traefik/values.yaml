@@ -17,3 +17,5 @@ secret:
 
 # cron expression
 cron: "10 * * * *"
+
+host:

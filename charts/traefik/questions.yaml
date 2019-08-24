@@ -62,3 +62,10 @@ questions:
   type: string
   group: "Schedule"
   default: "10 * * * *"
+
+- variable: host
+  required: true
+  description: "Host used to access"
+  label: Host used to access
+  type: string
+  group: "Credentials"
