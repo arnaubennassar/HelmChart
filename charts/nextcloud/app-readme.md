@@ -8,6 +8,8 @@ This app consist of three components:
 
 ## Set up
 
+When seting up Nextcloud, use MySQL as database, user and passwrod are provided via secret. The DB host is (name of the app):3306 ==D nextcloug:3306
+
 By default the App won't be accessible outside of localhost, it Nextcloud won't be available outside of LAN.
 
 To fix this:
