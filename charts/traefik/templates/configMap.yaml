@@ -30,7 +30,7 @@ data:
         [backends.backend1]
           [backends.backend1.servers]
             [backends.backend1.servers.server0]
-              url = "https://192.168.1.12"
+              url = "https://rancher"
 
       [frontends]
         [frontends.frontend1]
@@ -39,4 +39,4 @@ data:
           passHostHeader = true
           [frontends.frontend1.routes]
             [frontends.frontend1.routes.route0]
-              rule = "Host:www.rancher.nau.qhigh.com"
+              rule = "Host:rancher.nau.qhigh.com"
