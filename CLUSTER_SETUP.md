@@ -32,7 +32,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config```
 3. Deploy Flannel: `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
 4. The second command will also print a message that you must copy to use it later for joining nodes, looks like ```
-kubeadm join 192.168.1.10:6443 --token hhkur8.a29jtwfbscysvcoe \
+kubeadm join 192.168.1.10:6443 --token skj3g2.g9ss9oi5ixn3onwg \
     --discovery-token-ca-cert-hash sha256:a2049c0467b8742d34de96d1c43a27b9417c32d514eb3a5584b613a83f64bcf0 ```
 5. Paste that command on all the non master nodes (connect to them via ssh).
 6. Check that nodes have joined: `kubectl get nodes`
