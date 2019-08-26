@@ -28,5 +28,8 @@ spec:
   - port: 32400
     targetPort: 32400
     name: plex
+  - port: 32443
+    targetPort: 32443
+    name: plex
   selector:
     k8s-app: {{ .Values.appName }}

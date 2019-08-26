@@ -162,15 +162,17 @@ spec:
           image: "{{ .Values.image.plex }}:{{ .Values.image.plexTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: plex
-              containerPort: 32400
+          - name: plex
+            containerPort: 32400
+          - name: https
+            containerPort: 32443
           volumeMounts:
           - mountPath: /config
             name: piflix-v
-            subPath: piflix/plex/transcode
+            subPath: piflix/plex/config
           - mountPath: /transcode
             name: piflix-v
-            subPath: piflix/plex/config
+            subPath: piflix/plex/transcode
           - mountPath: /data/movies
             name: piflix-v
             subPath: piflix/data/movies

@@ -55,4 +55,4 @@ spec:
       - path: /
         backend:
           serviceName: {{ .Values.appName }}
-          servicePort: 32400
+          servicePort: 32443
