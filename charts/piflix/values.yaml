@@ -6,6 +6,8 @@ replicaCount: 1
 image:
   jellyfin: linuxserver/jellyfin
   jellyfinTag: latest
+  plex: linuxserver/plex
+  plexTag: latest
   jackett: linuxserver/jackett
   jackettTag: latest
   sonarr: linuxserver/sonarr
@@ -33,3 +35,4 @@ host:
   bazarr:
   jellyfin:
   jackett:
+  plex:
