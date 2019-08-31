@@ -16,11 +16,34 @@ spec:
       labels:
         k8s-app: {{ .Values.appName }}
     spec:
+      nodeSelector:
+        {{ .Values.selector.key }}: {{ .Values.selector.value }}
       volumes:
       - name: piflix-v
         persistentVolumeClaim:
           claimName: {{ .Values.pvcName }}
       containers:
+# JACKETT
+        - name: "jackett"
+          image: "{{ .Values.image.jackett }}:{{ .Values.image.jackettTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: jackett
+              containerPort: 9117
+          volumeMounts:
+          - mountPath: /config
+            name: piflix-v
+            subPath: piflix/jackett/config
+          - mountPath: /downloads
+            name: piflix-v
+            subPath: piflix/jackett/downloads
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
 # TRANSMISSION
         - name: "transmission"
           image: "{{ .Values.image.transmission }}:{{ .Values.image.transmissionTag }}"
@@ -128,35 +151,35 @@ spec:
           - name: TZ
             value: Europe/Madrid
 # JELLYFIN
-        - name: "jellyfin"
-          image: "{{ .Values.image.jellyfin }}:{{ .Values.image.jellyfinTag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: jellyfin
-              containerPort: 8096
-          volumeMounts:
-          - mountPath: /config
-            name: piflix-v
-            subPath: piflix/jellyfin/transcode
-          - mountPath: /transcode
-            name: piflix-v
-            subPath: piflix/jellyfin/config
-          - mountPath: /data/movies
-            name: piflix-v
-            subPath: piflix/data/movies
-          - mountPath: /data/tvshows
-            name: piflix-v
-            subPath: piflix/data/series
-          - mountPath: /data/fotos
-            name: piflix-v
-            subPath: piflix/data/fotos
-          env:
-          - name: PUID
-            value: "1000"
-          - name: PGID
-            value: "1000"
-          - name: TZ
-            value: Europe/Madrid
+        # - name: "jellyfin"
+        #   image: "{{ .Values.image.jellyfin }}:{{ .Values.image.jellyfinTag }}"
+        #   imagePullPolicy: {{ .Values.image.pullPolicy }}
+        #   ports:
+        #     - name: jellyfin
+        #       containerPort: 8096
+        #   volumeMounts:
+        #   - mountPath: /config
+        #     name: piflix-v
+        #     subPath: piflix/jellyfin/transcode
+        #   - mountPath: /transcode
+        #     name: piflix-v
+        #     subPath: piflix/jellyfin/config
+        #   - mountPath: /data/movies
+        #     name: piflix-v
+        #     subPath: piflix/data/movies
+        #   - mountPath: /data/tvshows
+        #     name: piflix-v
+        #     subPath: piflix/data/series
+        #   - mountPath: /data/fotos
+        #     name: piflix-v
+        #     subPath: piflix/data/fotos
+        #   env:
+        #   - name: PUID
+        #     value: "1000"
+        #   - name: PGID
+        #     value: "1000"
+        #   - name: TZ
+        #     value: Europe/Madrid
 # PLEX
         - name: "plex"
           image: "{{ .Values.image.plex }}:{{ .Values.image.plexTag }}"
@@ -180,27 +203,6 @@ spec:
           - mountPath: /data/fotos
             name: piflix-v
             subPath: piflix/data/fotos
-          env:
-          - name: PUID
-            value: "1000"
-          - name: PGID
-            value: "1000"
-          - name: TZ
-            value: Europe/Madrid
-# JACKETT
-        - name: "jackett"
-          image: "{{ .Values.image.jackett }}:{{ .Values.image.jackettTag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: jackett
-              containerPort: 9117
-          volumeMounts:
-          - mountPath: /config
-            name: piflix-v
-            subPath: piflix/jackett/config
-          - mountPath: /downloads
-            name: piflix-v
-            subPath: piflix/jackett/downloads
           env:
           - name: PUID
             value: "1000"

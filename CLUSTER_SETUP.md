@@ -1,29 +1,39 @@
 # Set up K8S Cluster
 
-## Atomic Pi
+## Install OS and dependencies
 
-### Install ubuntu server and dependencies
-
+### Atomic Pi (Ubuntu Server)
 1. Download last ubuntu server image
 2. Flash and boot, follow graphic installer
 3. SSH into the machine
 4. Install docker, kubeadm, kubelet and kubectl. `sudo apt-get update -y && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && sudo apt-get update && sudo apt-get install docker-ce -y && sudo systemctl enable docker && sudo systemctl restart docker && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl docker-ce`
 5. Disable swap: `sudo swapoff -a && sudo nano /etc/fstab`: comment the swap line
 6. Install gluster client (NOT IN THE MASTER NODE): `sudo add-apt-repository ppa:gluster/glusterfs-6 -y && sudo apt-get update -y && sudo apt-get install glusterfs-client -y`
+7. Change password: `passwd`
 
-## Rock64
+### Pi 4 (Raspbian Buster lite)
+1. Download last Raspbian lite [image](https://www.raspberrypi.org/downloads/raspbian/)
+2. Flash, when its done enable ssh: create a empty file named ssh on the root of boot partition
+3. SSH into the machine
+4. Install docker, kubeadm, kubelet and kubectl. ***WARNING: this script uses a hack to install docker for raspbian stretch since it's not available yet for buster*** `sudo apt-get update -y && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y && curl -sL get.docker.com | sed 's/9)/10)/' | sh && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl docker-ce`
+5. Disable swap: `sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo systemctl disable dphys-swapfile`
+6. Install gluster client (NOT IN THE MASTER NODE): `sudo apt-get install glusterfs-client -y`
+7. Change password: `passwd`
+8. Change hostname: `sudo nano /etc/hostname`
+9. Reboot: `sudo reboot`
 
-### Install ubuntu server and dependencies
-
+### Rock64 (Ubuntu Minimal Containers)
 1. Download and flash latest Ubuntu Minimal Containers [image](https://wiki.pine64.org/index.php/ROCK64_Software_Release)
 2. Connect to Rock64 via SSH (rock64 - rock64)
 3. Change password
 4. Install gluster client (NOT IN THE MASTER NODE): `sudo add-apt-repository ppa:gluster/glusterfs-6 -y && sudo apt-get update -y && sudo apt-get install glusterfs-client -y`
+5. Change password: `passwd`
+6. Change hostname: `sudo nano /etc/hostname`
+7. Reboot: `sudo reboot`
 
 ## K8S configuration
 
 ### Set up single master with flannel network, join nodes
-
 0. Connect via ssh to the node you want to be the master
 1. Init kubernetes (specific config for flannel): `sudo sysctl net.bridge.bridge-nf-call-iptables=1 && sudo kubeadm init --pod-network-cidr=10.244.0.0/16`.
 2. When it's done it will print a commands that you must apply, they will look like: ```
@@ -31,15 +41,14 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config```
 3. Deploy Flannel: `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
-4. The second command will also print a message that you must copy to use it later for joining nodes, looks like ```
-kubeadm join 192.168.1.10:6443 --token skj3g2.g9ss9oi5ixn3onwg \
-    --discovery-token-ca-cert-hash sha256:a2049c0467b8742d34de96d1c43a27b9417c32d514eb3a5584b613a83f64bcf0 ```
+4. The second command will also print a message that you must copy to use it later for joining nodes, looks like (you can get a new token by running `kubeadm token create`): ```
+kubeadm join 192.168.1.10:6443 --token ewpf1s.hinx1g1wei5wchw3 \
+    --discovery-token-ca-cert-hash sha256:a2049c0467b8742d34de96d1c43a27b9417c32d514eb3a5584b613a83f64bcf0```
 5. Paste that command on all the non master nodes (connect to them via ssh).
 6. Check that nodes have joined: `kubectl get nodes`
 7. Check that network is working: `kubectl get pods --all-namespaces` (CoreDNS should be running, may take some time)
 
 ### Rancher (only one node)
-
 0. Connect via ssh to the node you want to be the rancher server. Cannot be the node where the LB (traefik, nginx, ...) is deployed as it will require the 80 & 443 port.
 1. Run rancher: `sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher`
 2. Browse to the node IP and login into the Web UI. Add existing cluster.
@@ -60,7 +69,6 @@ kubeadm join 192.168.1.10:6443 --token skj3g2.g9ss9oi5ixn3onwg \
 3. Check that all nodes are listed: `gluster pool list`
 
 ## Topology
-
 Replicated volume with two bricks over three nodes with an arbiter:
 
 data-zero: 1T ==D 4G (arbi1) "1T" (brick0)
