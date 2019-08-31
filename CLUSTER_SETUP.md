@@ -17,7 +17,7 @@
 3. SSH into the machine
 4. Install docker, kubeadm, kubelet and kubectl. ***WARNING: this script uses a hack to install docker for raspbian stretch since it's not available yet for buster*** `sudo apt-get update -y && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y && curl -sL get.docker.com | sed 's/9)/10)/' | sh && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl docker-ce`
 5. Disable swap: `sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo systemctl disable dphys-swapfile`
-6. Install gluster client (NOT IN THE MASTER NODE): `sudo apt-get install glusterfs-client -y`
+6. Install gluster client (NOT IN THE MASTER NODE) ***WARNING: this will install an outdated version of gluster client***: `sudo apt-get install glusterfs-client -y`
 7. Change password: `passwd`
 8. Change hostname: `sudo nano /etc/hostname`
 9. Reboot: `sudo reboot`
@@ -53,6 +53,8 @@ kubeadm join 192.168.1.10:6443 --token ewpf1s.hinx1g1wei5wchw3 \
 1. Run rancher: `sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher`
 2. Browse to the node IP and login into the Web UI. Add existing cluster.
 
+### Labels
+1. Add labels to be able to chose in which nodes pods will run: `kubectl label nodes <node-name> <label-key>=<label-value>`
 
 # GlusterFS
 

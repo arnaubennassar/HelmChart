@@ -40,3 +40,4 @@ data:
           [frontends.frontend1.routes]
             [frontends.frontend1.routes.route0]
               rule = "Host:rancher.nau.qhigh.com"
+              rule = "ReplacePathRegex:^rancher.nau.qhigh.com 192.168.1.12"
