@@ -22,3 +22,7 @@ pvcName:
 host: cloud.nau.qhigh.com
 
 cron: "10 * * * *"
+
+selector:
+  key:
+  value:

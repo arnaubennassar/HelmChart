@@ -81,3 +81,16 @@ questions:
   label: Cronjob expression to execute nextcloud update (it will refresh news, ...)
   type: string
   group: "Cronjob"
+# SELECTOR
+- variable: selector.key
+  required: true
+  description: "Key of the node label used to select the node were the pod will run"
+  label: Key of the node label used to select the node were the pod will run
+  type: string
+  group: "Selector"
+- variable: selector.value
+  required: true
+  description: "Value of the key"
+  label: Value of the key
+  type: string
+  group: "Selector"
