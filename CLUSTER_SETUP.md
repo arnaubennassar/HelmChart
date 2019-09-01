@@ -15,12 +15,15 @@
 1. Download last Raspbian lite [image](https://www.raspberrypi.org/downloads/raspbian/)
 2. Flash, when its done enable ssh: create a empty file named ssh on the root of boot partition
 3. SSH into the machine
-4. Install docker, kubeadm, kubelet and kubectl. ***WARNING: this script uses a hack to install docker for raspbian stretch since it's not available yet for buster*** `sudo apt-get update -y && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y && curl -sL get.docker.com | sed 's/9)/10)/' | sh && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl docker-ce`
-5. Disable swap: `sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo systemctl disable dphys-swapfile`
-6. Install gluster client (NOT IN THE MASTER NODE) ***WARNING: this will install an outdated version of gluster client***: `sudo apt-get install glusterfs-client -y`
-7. Change password: `passwd`
-8. Change hostname: `sudo nano /etc/hostname`
-9. Reboot: `sudo reboot`
+4. Create new user: `sudo useradd <node-name> && sudo passwd <node-name>`. Add the user to the sudoers `sudo adduser <node-name> sudo`. Exit and login with the new user.
+5. Delete old user: `userdel -r -f pi`
+6. Change hostname: `sudo nano /etc/hostname`
+7. Install docker, kubeadm, kubelet and kubectl. ***WARNING: this script uses a hack to install docker for raspbian stretch since it's not available yet for buster*** `sudo apt-get update -y && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y && curl -sL get.docker.com | sed 's/9)/10)/' | sh && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl docker-ce`
+8. Disable swap: `sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo systemctl disable dphys-swapfile`
+9. Install gluster client (NOT IN THE MASTER NODE) ***WARNING: this will install an outdated version of gluster client***: `sudo apt-get install glusterfs-client -y`
+10. Add ` cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory` at the end of /boot/cmdline.txt
+11. REQUIED BY FLANNEL? `sudo sysctl net.bridge.bridge-nf-call-iptables=1`
+12. Reboot: `sudo reboot`
 
 ### Rock64 (Ubuntu Minimal Containers)
 1. Download and flash latest Ubuntu Minimal Containers [image](https://wiki.pine64.org/index.php/ROCK64_Software_Release)
@@ -40,7 +43,10 @@
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config```
-3. Deploy Flannel: `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
+3. Deploy Flannel: `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`. *Required by Raspberrys?:* `kubectl patch daemonset kube-flannel-ds-arm \
+      --namespace=kube-system \
+      --patch='{"spec":{"template":{"spec":{"tolerations":[{"key": "node-role.kubernetes.io/master", "operator": "Exists", "effect":
+      "NoSchedule"},{"effect":"NoSchedule","operator":"Exists"}]}}}}'`
 4. The second command will also print a message that you must copy to use it later for joining nodes, looks like (you can get a new token by running `kubeadm token create`): ```
 kubeadm join 192.168.1.10:6443 --token ewpf1s.hinx1g1wei5wchw3 \
     --discovery-token-ca-cert-hash sha256:a2049c0467b8742d34de96d1c43a27b9417c32d514eb3a5584b613a83f64bcf0```
@@ -55,6 +61,9 @@ kubeadm join 192.168.1.10:6443 --token ewpf1s.hinx1g1wei5wchw3 \
 
 ### Labels
 1. Add labels to be able to chose in which nodes pods will run: `kubectl label nodes <node-name> <label-key>=<label-value>`
+
+## Remove a node
+1. *Replace <node-name>!!!*: `kubectl drain <node-name> && kubectl drain <node-name> --ignore-daemonsets --delete-local-data && kubectl delete node <node-name>`
 
 # GlusterFS
 

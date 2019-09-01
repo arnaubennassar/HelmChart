@@ -7,8 +7,6 @@ metadata:
   labels:
     k8s-app: {{ .Values.appName }}
 spec:
-  nodeSelector:
-    {{ .Values.selector.key }}: {{ .Values.selector.value }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -18,6 +16,8 @@ spec:
       labels:
         k8s-app: {{ .Values.appName }}
     spec:
+      nodeSelector:
+        {{ .Values.selector.key }}: {{ .Values.selector.value }}
       volumes:
       - name: nextcloud-v
         persistentVolumeClaim:
