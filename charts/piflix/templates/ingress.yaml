@@ -28,13 +28,13 @@ spec:
         backend:
           serviceName: {{ .Values.appName }}
           servicePort: 7878
-  - host: {{ .Values.host.bazarr }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: {{ .Values.appName }}
-          servicePort: 6767
+  # - host: {{ .Values.host.bazarr }}
+  #   http:
+  #     paths:
+  #     - path: /
+  #       backend:
+  #         serviceName: {{ .Values.appName }}
+  #         servicePort: 6767
   - host: {{ .Values.host.jackett }}
     http:
       paths:
@@ -42,13 +42,13 @@ spec:
         backend:
           serviceName: {{ .Values.appName }}
           servicePort: 9117
-  - host: {{ .Values.host.jellyfin }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: {{ .Values.appName }}
-          servicePort: 8096
+  # - host: {{ .Values.host.jellyfin }}
+  #   http:
+  #     paths:
+  #     - path: /
+  #       backend:
+  #         serviceName: {{ .Values.appName }}
+  #         servicePort: 8096
   - host: {{ .Values.host.plex }}
     http:
       paths:

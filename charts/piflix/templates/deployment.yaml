@@ -127,29 +127,29 @@ spec:
           - name: TZ
             value: Europe/Madrid
 # BAZARR
-        - name: "bazarr"
-          image: "{{ .Values.image.bazarr }}:{{ .Values.image.bazarrTag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: bazarr
-              containerPort: 6767
-          volumeMounts:
-          - mountPath: /config
-            name: piflix-v
-            subPath: piflix/bazarr/config
-          - mountPath: /movies
-            name: piflix-v
-            subPath: piflix/data/movies
-          - mountPath: /tv
-            name: piflix-v
-            subPath: piflix/data/series
-          env:
-          - name: PUID
-            value: "1000"
-          - name: PGID
-            value: "1000"
-          - name: TZ
-            value: Europe/Madrid
+        # - name: "bazarr"
+        #   image: "{{ .Values.image.bazarr }}:{{ .Values.image.bazarrTag }}"
+        #   imagePullPolicy: {{ .Values.image.pullPolicy }}
+        #   ports:
+        #     - name: bazarr
+        #       containerPort: 6767
+        #   volumeMounts:
+        #   - mountPath: /config
+        #     name: piflix-v
+        #     subPath: piflix/bazarr/config
+        #   - mountPath: /movies
+        #     name: piflix-v
+        #     subPath: piflix/data/movies
+        #   - mountPath: /tv
+        #     name: piflix-v
+        #     subPath: piflix/data/series
+        #   env:
+        #   - name: PUID
+        #     value: "1000"
+        #   - name: PGID
+        #     value: "1000"
+        #   - name: TZ
+        #     value: Europe/Madrid
 # JELLYFIN
         # - name: "jellyfin"
         #   image: "{{ .Values.image.jellyfin }}:{{ .Values.image.jellyfinTag }}"

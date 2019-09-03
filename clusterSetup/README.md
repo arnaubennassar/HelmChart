@@ -11,28 +11,26 @@
 6. Install gluster client (NOT IN THE MASTER NODE): `sudo add-apt-repository ppa:gluster/glusterfs-6 -y && sudo apt-get update -y && sudo apt-get install glusterfs-client -y`
 7. Change password: `passwd`
 
-### Pi 4 (Raspbian Buster lite)
-1. Download last Raspbian lite [image](https://www.raspberrypi.org/downloads/raspbian/)
-2. Flash, when its done enable ssh: create a empty file named ssh on the root of boot partition
-3. SSH into the machine
-4. Create new user: `sudo useradd <node-name> && sudo passwd <node-name>`. Add the user to the sudoers `sudo adduser <node-name> sudo`. Exit and login with the new user.
-5. Delete old user: `userdel -r -f pi`
-6. Change hostname: `sudo nano /etc/hostname`
-7. Install docker, kubeadm, kubelet and kubectl. ***WARNING: this script uses a hack to install docker for raspbian stretch since it's not available yet for buster*** `sudo apt-get update -y && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y && curl -sL get.docker.com | sed 's/9)/10)/' | sh && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl docker-ce`
-8. Disable swap: `sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo systemctl disable dphys-swapfile`
-9. Install gluster client (NOT IN THE MASTER NODE) ***WARNING: this will install an outdated version of gluster client***: `sudo apt-get install glusterfs-client -y`
-10. Add ` cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory` at the end of /boot/cmdline.txt
-11. REQUIED BY FLANNEL? `sudo sysctl net.bridge.bridge-nf-call-iptables=1`
-12. Reboot: `sudo reboot`
+### Pi 4 (Ubuntu Server 64bits) *This image is unofficial, upgrade to official when released!*
+1. Download latest image [here](https://jamesachambers.com/raspberry-pi-ubuntu-server-18-04-2-installation-guide/)
+2. Flash
+3. SSH into the machine (can take a while, ubuntu - ubuntu)
+4. Change hostname: `sudo nano /etc/hostname`
+5. Create new user *Replace <node-name>!!!*: `sudo useradd worker-four && sudo passwd worker-four`. Add the user to the sudoers `sudo adduser worker-four sudo`. Exit and login with the new user.
+6. Delete old user: `sudo userdel -r -f ubuntu`
+7. Disable swap: `sudo swapoff -a`: comment the swap line
+8. Install gluster client, docker, kubeadm, kubelet and kubectl. `sudo add-apt-repository ppa:gluster/glusterfs-6 -y && sudo apt-get update -y && sudo apt-get install apt-transport-https ca-certificates curl software-properties-common glusterfs-client -y && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && sudo apt-get update && sudo apt-get install docker-ce -y && sudo systemctl enable docker && sudo systemctl restart docker && curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list && sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl && sudo apt-mark hold kubelet kubeadm kubectl docker-ce`
+9. Reboot: `sudo reboot`
 
 ### Rock64 (Ubuntu Minimal Containers)
 1. Download and flash latest Ubuntu Minimal Containers [image](https://wiki.pine64.org/index.php/ROCK64_Software_Release)
 2. Connect to Rock64 via SSH (rock64 - rock64)
 3. Change password
-4. Install gluster client (NOT IN THE MASTER NODE): `sudo add-apt-repository ppa:gluster/glusterfs-6 -y && sudo apt-get update -y && sudo apt-get install glusterfs-client -y`
-5. Change password: `passwd`
-6. Change hostname: `sudo nano /etc/hostname`
-7. Reboot: `sudo reboot`
+4. Change hostname: `sudo nano /etc/hostname`
+5. Create new user *Replace <node-name>!!!*: `sudo useradd worker-five && sudo passwd worker-five`. Add the user to the sudoers `sudo adduser worker-five sudo`. Exit and login with the new user.
+6. Delete old user: `sudo userdel -r -f rock64`
+7. Install gluster client (NOT IN THE MASTER NODE): `sudo add-apt-repository ppa:gluster/glusterfs-6 -y && sudo apt-get update -y && sudo apt-get install glusterfs-client -y`
+8. Reboot: `sudo reboot`
 
 ## K8S configuration
 
@@ -50,9 +48,9 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config```
 4. The second command will also print a message that you must copy to use it later for joining nodes, looks like (you can get a new token by running `kubeadm token create`): ```
 kubeadm join 192.168.1.10:6443 --token ewpf1s.hinx1g1wei5wchw3 \
     --discovery-token-ca-cert-hash sha256:a2049c0467b8742d34de96d1c43a27b9417c32d514eb3a5584b613a83f64bcf0```
-5. Paste that command on all the non master nodes (connect to them via ssh).
-6. Check that nodes have joined: `kubectl get nodes`
-7. Check that network is working: `kubectl get pods --all-namespaces` (CoreDNS should be running, may take some time)
+
+### Join node
+1. SSH into the nodes (all except the master) and run (Change IP of the master node and token): `sudo kubeadm join 192.168.1.10:6443 --token swj3k8.gik2hr3iapoweo11 --discovery-token-unsafe-skip-ca-verification`
 
 ### Rancher (only one node)
 0. Connect via ssh to the node you want to be the rancher server. Cannot be the node where the LB (traefik, nginx, ...) is deployed as it will require the 80 & 443 port.
@@ -63,7 +61,7 @@ kubeadm join 192.168.1.10:6443 --token ewpf1s.hinx1g1wei5wchw3 \
 1. Add labels to be able to chose in which nodes pods will run: `kubectl label nodes <node-name> <label-key>=<label-value>`
 
 ## Remove a node
-1. *Replace <node-name>!!!*: `kubectl drain <node-name> && kubectl drain <node-name> --ignore-daemonsets --delete-local-data && kubectl delete node <node-name>`
+1. *Replace <node-name>!!!*: `kubectl drain worker-three --ignore-daemonsets --delete-local-data && kubectl delete node worker-three`
 
 # GlusterFS
 

@@ -16,15 +16,15 @@ spec:
   - port: 7878
     targetPort: 7878
     name: radarr
-  - port: 6767
-    targetPort: 6767
-    name: bazarr
+  # - port: 6767
+  #   targetPort: 6767
+  #   name: bazarr
   - port: 9117
     targetPort: 9117
     name: jackett
-  - port: 8096
-    targetPort: 8096
-    name: jellyfin
+  # - port: 8096
+  #   targetPort: 8096
+  #   name: jellyfin
   - port: 32400
     targetPort: 32400
     name: plex
