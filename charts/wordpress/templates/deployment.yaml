@@ -66,6 +66,8 @@ spec:
             - name: wordpress
               containerPort: 80
           env:
+          - name: WORDPRESS_DB_HOST
+            value: "127.0.0.1:3306"
           - name: WORDPRESS_DB_USER
             valueFrom:
               secretKeyRef:
