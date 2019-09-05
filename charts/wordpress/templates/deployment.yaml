@@ -84,7 +84,7 @@ spec:
                 name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbDatabaseKey }}
           - name: WORDPRESS_TABLE_PREFIX
-            value: "wp-"
+            value: "wp_"
           - name: WORDPRESS_CONFIG_EXTRA
             value: |
               /* Multisite */
