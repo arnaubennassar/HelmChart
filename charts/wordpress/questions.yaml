@@ -46,24 +46,6 @@ questions:
   label: Root password for MariaDB
   type: string
   group: "Secrets"
-- variable: secret.mariadbUsernameKey
-  required: true
-  description: "Secret key for: Username for MariaDB (used by wordpress)"
-  label: Username for MariaDB (used by wordpress)
-  type: string
-  group: "Secrets"
-- variable: secret.mariadbPasswordKey
-  required: true
-  description: "Secret key for: Password for MariaDB (used by wordpress)"
-  label: Password for MariaDB (used by wordpress)
-  type: string
-  group: "Secrets"
-- variable: secret.mariadbDatabaseKey
-  required: true
-  description: "Secret key for: wordpress database mame"
-  label: wordpress database mame
-  type: string
-  group: "Secrets"
 
 # STORAGE
 - variable: pvcName

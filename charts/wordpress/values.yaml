@@ -13,9 +13,6 @@ image:
 secret:
   name:
   mariadbRootPasswordKey:
-  mariadbUsernameKey:
-  mariadbPasswordKey:
-  mariadbDatabaseKey:
 
 pvcName:
 
