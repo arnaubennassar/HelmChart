@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    k8s-app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      k8s-app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ .Values.appName }}
+    spec:
+      volumes:
+      - name: wordpress-v
+        persistentVolumeClaim:
+          claimName: {{ .Values.pvcName }}
+      nodeSelector:
+        {{ .Values.selector.key }}:{{ .Values.selector.value }}
+      containers:
+        - name: "mariadb"
+          image: "{{ .Values.image.mariadb }}:{{ .Values.image.mariadbTag }}"
+          ports:
+            - name: mariadb
+              containerPort: 3306
+          env:
+          - name: MARIADB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbRootPasswordKey }}
+          - name: MARIADB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbUsernameKey }}
+          - name: MARIADB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbPasswordKey }}
+          - name: MARIADB_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbDatabaseKey }}
+          volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: wordpress-v
+            subPath: wordpress/mariadb/mysql
+          - mountPath: /etc/mysql/conf.d
+            name: wordpress-v
+            subPath: wordpress/mariadb/conf.d
+          - mountPath: /var/lib/backup
+            name: wordpress-v
+            subPath: wordpress/mariadb/backup
+        - name: "wordpress"
+          image: "{{ .Values.image.wordpress }}:{{ .Values.image.wordpressTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: wordpress
+              containerPort: 80
+          env:
+          - name: WORDPRESS_DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbUsernameKey }}
+          - name: WORDPRESS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbPasswordKey }}
+          - name: WORDPRESS_DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbDatabaseKey }}
+          - name: WORDPRESS_TABLE_PREFIX
+            value: "wp-"

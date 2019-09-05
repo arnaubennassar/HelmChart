@@ -1,0 +1,26 @@
+appName: wordpress
+namespace: default
+
+replicaCount: 1
+
+image:
+  wordpress: wordpress
+  wordpressTag: latest
+  mariadb: webhippie/mariadb
+  mariadbTag: latest
+  pullPolicy: IfNotPresent
+
+secret:
+  name:
+  mariadbRootPasswordKey:
+  mariadbUsernameKey:
+  mariadbPasswordKey:
+  mariadbDatabaseKey:
+
+pvcName:
+
+host: word.nau.qhigh.com
+
+selector:
+  key:
+  value:
