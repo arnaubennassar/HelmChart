@@ -44,11 +44,6 @@ spec:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbPasswordKey }}
-          - name: MARIADB_DATABASE
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.secret.name }}
-                key: {{ .Values.secret.mariadbDatabaseKey }}
           volumeMounts:
           - mountPath: /var/lib/mysql
             name: wordpress-v
@@ -82,6 +77,11 @@ spec:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbPasswordKey }}
+          - name: WORDPRESS_DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.name }}
+                key: {{ .Values.secret.mariadbDatabaseKey }}
           - name: WORDPRESS_TABLE_PREFIX
             value: "wp_"
           - name: WORDPRESS_CONFIG_EXTRA
