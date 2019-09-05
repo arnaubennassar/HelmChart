@@ -62,6 +62,10 @@ spec:
         - name: "wordpress"
           image: "{{ .Values.image.wordpress }}:{{ .Values.image.wordpressTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+          - mountPath: /var/www/html
+            name: wordpress-v
+            subPath: wordpress/wordpress
           ports:
             - name: wordpress
               containerPort: 80
@@ -78,11 +82,6 @@ spec:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbPasswordKey }}
-          - name: WORDPRESS_DB_NAME
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.secret.name }}
-                key: {{ .Values.secret.mariadbDatabaseKey }}
           - name: WORDPRESS_TABLE_PREFIX
             value: "wp_"
           - name: WORDPRESS_CONFIG_EXTRA
