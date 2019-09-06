@@ -55,6 +55,15 @@ questions:
   type: string
   group: "Storage"
 
+# HOST
+- variable: host
+  required: true
+  description: "URL used to access the service"
+  label: URL used to access the service
+  default: word.nau.qhigh.com
+  type: string
+  group: "Storage"
+
 # SELECTOR
 - variable: selector.key
   required: true
