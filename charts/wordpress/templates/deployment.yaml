@@ -35,6 +35,10 @@ spec:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbRootPasswordKey }}
+          - name: MARIADB_USERNAME
+            value: "boom"
+          - name: MARIADB_PASSWORD
+            value: "boom"
           volumeMounts:
           - mountPath: /var/lib/mysql
             name: wordpress-v
@@ -54,12 +58,9 @@ spec:
           - name: WORDPRESS_DB_HOST
             value: "wordpress"
           - name: WORDPRESS_DB_USER
-            value: "root"
+            value: "boom"
           - name: WORDPRESS_DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.secret.name }}
-                key: {{ .Values.secret.mariadbRootPasswordKey }}
+            valu: "boom"
           - name: WORDPRESS_DB_NAME
             value: "word"
           - name: WORDPRESS_TABLE_PREFIX
@@ -74,6 +75,4 @@ spec:
               define('PATH_CURRENT_SITE', '/');
               define('SITE_ID_CURRENT_SITE', 1);
               define('BLOG_ID_CURRENT_SITE', 1);
-              define('WP_DEBUG', true);
-              define('WP_DEBUG_LOG', true);
               define('WP_ALLOW_REPAIR', true);
