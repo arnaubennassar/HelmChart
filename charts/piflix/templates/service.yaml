@@ -25,8 +25,8 @@ spec:
   # - port: 8096
   #   targetPort: 8096
   #   name: jellyfin
-  - port: 32400
-    targetPort: 32400
-    name: plex
+  # - port: 32400
+  #   targetPort: 32400
+  #   name: plex
   selector:
     k8s-app: {{ .Values.appName }}

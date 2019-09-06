@@ -49,10 +49,10 @@ spec:
   #       backend:
   #         serviceName: {{ .Values.appName }}
   #         servicePort: 8096
-  - host: {{ .Values.host.plex }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: {{ .Values.appName }}
-          servicePort: 32400
+  # - host: {{ .Values.host.plex }}
+  #   http:
+  #     paths:
+  #     - path: /
+  #       backend:
+  #         serviceName: {{ .Values.appName }}
+  #         servicePort: 32400

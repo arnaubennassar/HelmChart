@@ -66,28 +66,28 @@ questions:
     description: "jackett container image tag"
     type: string
     label: jackett container image tag
-  # jellyfin
-  - variable: image.jellyfin
-    default: "linuxserver/jellyfin"
-    description: "jellyfin container image"
-    type: string
-    label: jellyfin container image
-  - variable: image.jellyfinTag
-    default: "latest"
-    description: "jellyfin container image tag"
-    type: string
-    label: jellyfin container image tag
-  # plex
-  - variable: image.plex
-    default: "linuxserver/plex"
-    description: "plex container image"
-    type: string
-    label: plex container image
-  - variable: image.plexTag
-    default: "latest"
-    description: "plex container image tag"
-    type: string
-    label: plex container image tag
+  # # jellyfin
+  # - variable: image.jellyfin
+  #   default: "linuxserver/jellyfin"
+  #   description: "jellyfin container image"
+  #   type: string
+  #   label: jellyfin container image
+  # - variable: image.jellyfinTag
+  #   default: "latest"
+  #   description: "jellyfin container image tag"
+  #   type: string
+  #   label: jellyfin container image tag
+  # # plex
+  # - variable: image.plex
+  #   default: "linuxserver/plex"
+  #   description: "plex container image"
+  #   type: string
+  #   label: plex container image
+  # - variable: image.plexTag
+  #   default: "latest"
+  #   description: "plex container image tag"
+  #   type: string
+  #   label: plex container image tag
 # SECRETS
 - variable: secret.name
   required: true
@@ -139,18 +139,18 @@ questions:
   label: URL for bazarr
   type: string
   group: "Hosts"
-- variable: host.jellyfin
-  required: true
-  description: "URL for jellyfin"
-  label: URL for jellyfin
-  type: string
-  group: "Hosts"
-- variable: host.plex
-  required: true
-  description: "URL for plex"
-  label: URL for plex
-  type: string
-  group: "Hosts"
+# - variable: host.jellyfin
+#   required: true
+#   description: "URL for jellyfin"
+#   label: URL for jellyfin
+#   type: string
+#   group: "Hosts"
+# - variable: host.plex
+#   required: true
+#   description: "URL for plex"
+#   label: URL for plex
+#   type: string
+#   group: "Hosts"
 - variable: host.jackett
   required: true
   description: "URL for jackett"

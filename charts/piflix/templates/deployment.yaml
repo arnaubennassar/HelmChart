@@ -181,32 +181,32 @@ spec:
         #   - name: TZ
         #     value: Europe/Madrid
 # PLEX
-        - name: "plex"
-          image: "{{ .Values.image.plex }}:{{ .Values.image.plexTag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-          - name: plex
-            containerPort: 32400
-          volumeMounts:
-          - mountPath: /config
-            name: piflix-v
-            subPath: piflix/plex/config
-          - mountPath: /transcode
-            name: piflix-v
-            subPath: piflix/plex/transcode
-          - mountPath: /data/movies
-            name: piflix-v
-            subPath: piflix/data/movies
-          - mountPath: /data/tvshows
-            name: piflix-v
-            subPath: piflix/data/series
-          - mountPath: /data/fotos
-            name: piflix-v
-            subPath: piflix/data/fotos
-          env:
-          - name: PUID
-            value: "1000"
-          - name: PGID
-            value: "1000"
-          - name: TZ
-            value: Europe/Madrid
+        # - name: "plex"
+        #   image: "{{ .Values.image.plex }}:{{ .Values.image.plexTag }}"
+        #   imagePullPolicy: {{ .Values.image.pullPolicy }}
+        #   ports:
+        #   - name: plex
+        #     containerPort: 32400
+        #   volumeMounts:
+        #   - mountPath: /config
+        #     name: piflix-v
+        #     subPath: piflix/plex/config
+        #   - mountPath: /transcode
+        #     name: piflix-v
+        #     subPath: piflix/plex/transcode
+        #   - mountPath: /data/movies
+        #     name: piflix-v
+        #     subPath: piflix/data/movies
+        #   - mountPath: /data/tvshows
+        #     name: piflix-v
+        #     subPath: piflix/data/series
+        #   - mountPath: /data/fotos
+        #     name: piflix-v
+        #     subPath: piflix/data/fotos
+        #   env:
+        #   - name: PUID
+        #     value: "1000"
+        #   - name: PGID
+        #     value: "1000"
+        #   - name: TZ
+        #     value: Europe/Madrid

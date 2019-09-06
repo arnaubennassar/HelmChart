@@ -1,0 +1,17 @@
+appName: plex
+namespace: default
+
+replicaCount: 1
+
+image:
+  plex: linuxserver/plex
+  plexTag: latest
+
+pvcName:
+
+host:
+  plex:
+
+selector:
+  key:
+  value:
