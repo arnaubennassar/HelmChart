@@ -43,10 +43,10 @@ spec:
         - name: "wordpress"
           image: "{{ .Values.image.wordpress }}:{{ .Values.image.wordpressTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          # volumeMounts:
-          # - mountPath: /var/www/html
-          #   name: wordpress-v
-          #   subPath: wordpress/wordpress
+          volumeMounts:
+          - mountPath: /var/www/html
+            name: wordpress-v
+            subPath: wordpress/wordpress
           ports:
             - name: wordpress
               containerPort: 80
