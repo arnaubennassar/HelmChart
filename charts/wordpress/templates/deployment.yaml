@@ -35,10 +35,10 @@ spec:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.mariadbRootPasswordKey }}
-          volumeMounts:
-          - mountPath: /var/lib/mysql
-            name: wordpress-v
-            subPath: wordpress/mariadb
+          # volumeMounts:
+          # - mountPath: /var/lib/mysql
+          #   name: wordpress-v
+          #   subPath: wordpress/mariadb
         # WORDPRESS CONTAINER
         - name: "wordpress"
           image: "{{ .Values.image.wordpress }}:{{ .Values.image.wordpressTag }}"
@@ -52,7 +52,7 @@ spec:
               containerPort: 80
           env:
           - name: WORDPRESS_DB_HOST
-            value: "127.0.0.1"
+            value: "127.0.0.1:3306"
           - name: WORDPRESS_DB_USER
             value: "root"
           - name: WORDPRESS_DB_PASSWORD
