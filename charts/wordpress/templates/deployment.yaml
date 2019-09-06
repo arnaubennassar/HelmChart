@@ -23,13 +23,14 @@ spec:
         persistentVolumeClaim:
           claimName: {{ .Values.pvcName }}
       containers:
+        # MARIADB CONTAINER
         - name: "mariadb"
           image: "{{ .Values.image.mariadb }}:{{ .Values.image.mariadbTag }}"
           ports:
             - name: mariadb
               containerPort: 3306
           env:
-          - name: MARIADB_ROOT_PASSWORD
+          - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
@@ -37,13 +38,8 @@ spec:
           volumeMounts:
           - mountPath: /var/lib/mysql
             name: wordpress-v
-            subPath: wordpress/mariadb/mysql
-          - mountPath: /etc/mysql/conf.d
-            name: wordpress-v
-            subPath: wordpress/mariadb/conf.d
-          - mountPath: /var/lib/backup
-            name: wordpress-v
-            subPath: wordpress/mariadb/backup
+            subPath: wordpress/mariadb
+        # WORDPRESS CONTAINER
         - name: "wordpress"
           image: "{{ .Values.image.wordpress }}:{{ .Values.image.wordpressTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -74,7 +70,7 @@ spec:
               define('WP_ALLOW_MULTISITE', true );
               define('MULTISITE', true);
               define('SUBDOMAIN_INSTALL', false);
-              define('DOMAIN_CURRENT_SITE', '{{ .Values.host }}'); // TODO: change to actual domain when deploying
+              define('DOMAIN_CURRENT_SITE', '{{ .Values.host }}');
               define('PATH_CURRENT_SITE', '/');
               define('SITE_ID_CURRENT_SITE', 1);
               define('BLOG_ID_CURRENT_SITE', 1);

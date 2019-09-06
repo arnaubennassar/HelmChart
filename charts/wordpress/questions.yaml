@@ -23,7 +23,7 @@ questions:
     label: Wordpress container image tag
   # MariaDB
   - variable: image.mariadb
-    default: "webhippie/mariadb"
+    default: "mariadb"
     description: "MariaDB container image"
     type: string
     label: MariaDB container image

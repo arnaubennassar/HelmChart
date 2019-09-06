@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   wordpress: wordpress
   wordpressTag: latest
-  mariadb: webhippie/mariadb
+  mariadb: mariadb
   mariadbTag: latest
   pullPolicy: IfNotPresent
 
