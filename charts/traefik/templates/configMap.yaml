@@ -30,7 +30,7 @@ data:
         [backends.backend1]
           [backends.backend1.servers]
             [backends.backend1.servers.server0]
-              url = "https://192.168.1.12"
+              url = "https://rancher.nau.qhigh.com"
 
       [frontends]
         [frontends.frontend1]
