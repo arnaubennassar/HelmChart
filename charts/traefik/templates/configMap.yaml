@@ -39,4 +39,4 @@ data:
           passHostHeader = true
           [frontends.frontend1.routes]
             [frontends.frontend1.routes.route0]
-              rule = "Host:rancher.nau.qhigh.com;ReplacePathRegex:rancher.nau.qhigh.com 192.168.1.12"
+              rule = "Host:rancher.nau.qhigh.com"
