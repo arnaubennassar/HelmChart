@@ -35,14 +35,14 @@ spec:
             subPath: firefoxSync/
           env:
           - name: SYNCSERVER_PUBLIC_URL
-            value: {{ .Values.host }}:5000
+            value: "{{ .Values.host }}:5000"
           - name: SYNCSERVER_SECRET
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.secret.name }}
                 key: {{ .Values.secret.key }}
           - name: SYNCSERVER_SQLURI
-            value: sqlite:////data/syncserver.db
+            value: "sqlite:////data/syncserver.db"
           - name: SYNCSERVER_BATCH_UPLOAD_ENABLED
             value: "true"
           - name: SYNCSERVER_FORCE_WSGI_ENVIRON
