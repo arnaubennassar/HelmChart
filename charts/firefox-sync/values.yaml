@@ -1,0 +1,20 @@
+appName: firefox-sync
+namespace: default
+
+replicaCount: 1
+
+image:
+  firefox-sync: mozilla/syncserver
+  firefox-syncTag: latest
+
+pvcName:
+
+secret:
+  name:
+  key:
+
+host:
+
+selector:
+  key:
+  value:

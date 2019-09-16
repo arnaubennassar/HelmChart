@@ -56,6 +56,7 @@ kubeadm join 192.168.1.10:6443 --token ewpf1s.hinx1g1wei5wchw3 \
 0. Connect via ssh to the node you want to be the rancher server. Cannot be the node where the LB (traefik, nginx, ...) is deployed as it will require the 80 & 443 port.
 1. Run rancher: `sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher`
 2. Browse to the node IP and login into the Web UI. Add existing cluster.
+3. To access it remotely: `ssh -f user@ssh.server.com -L 6443:rancher.host.ip:443 -N`. Then in your browser: https://localhost:6443
 
 ### Labels
 1. Add labels to be able to chose in which nodes pods will run: `kubectl label nodes <node-name> <label-key>=<label-value>`

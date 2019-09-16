@@ -1,0 +1,64 @@
+categories:
+- passwords
+- bookmarks
+questions:
+# IMAGE
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  # firefox sync server
+  - variable: image.firefox-sync
+    default: "mozilla/syncserver"
+    description: "firefox sync server container image"
+    type: string
+    label: firefox sync server container image
+  - variable: image.firefox-syncTag
+    default: "latest"
+    description: "firefox sync server container image tag"
+    type: string
+    label: firefox sync server container image tag
+# STORAGE
+- variable: pvcName
+  required: true
+  description: "Persistent volume claim"
+  label: Persistent volume claim
+  type: string
+  group: "Storage"
+# SECRETS
+- variable: secret.name
+  required: true
+  description: "Name of the secret to be used"
+  label: Name of the secret to be used
+  type: string
+  group: "Secrets"
+- variable: secret.key
+  required: true
+  description: "Secret key for: Firefox sync server key"
+  label: Secret key for: Firefox sync server key
+  type: string
+  group: "Secrets"
+# HOSTS
+- variable: host
+  required: true
+  description: "URL for firefox sync server"
+  label: URL for firefox sync server
+  type: string
+  group: "Hosts"
+# SELECTOR
+- variable: selector.key
+  required: true
+  description: "Key of the node label used to select the node were the pod will run"
+  label: Key of the node label used to select the node were the pod will run
+  type: string
+  group: "Selector"
+- variable: selector.value
+  required: true
+  description: "Value of the key"
+  label: Value of the key
+  type: string
+  group: "Selector"
