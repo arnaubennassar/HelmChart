@@ -24,7 +24,7 @@ spec:
           claimName: {{ .Values.pvcName }}
       containers:
         - name: "{{ .Values.appName }}"
-          image: "{{ .Values.image.plex }}:{{ .Values.image.plexTag }}"
+          image: "{{ .Values.image.firefox-sync }}:{{ .Values.image.firefox-syncTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - name: {{ .Values.appName }}
