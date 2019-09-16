@@ -1,4 +1,4 @@
-appName: firefox-sync
+appName: firefoxsync
 namespace: default
 
 replicaCount: 1
