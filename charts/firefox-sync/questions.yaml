@@ -12,12 +12,12 @@ questions:
   group: "Container Images"
   subquestions:
   # firefox sync server
-  - variable: image.
+  - variable: image.firefoxSync
     default: "mozilla/syncserver"
     description: "firefox sync server container image"
     type: string
     label: firefox sync server container image
-  - variable: image.Tag
+  - variable: image.firefoxSyncTag
     default: "latest"
     description: "firefox sync server container image tag"
     type: string
