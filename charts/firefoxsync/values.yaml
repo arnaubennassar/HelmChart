@@ -6,6 +6,7 @@ replicaCount: 1
 image:
   firefoxsync: mozilla/syncserver
   firefoxsyncTag: latest
+  pullPolicy: IfNotPresent
 
 pvcName:
 

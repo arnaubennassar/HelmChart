@@ -6,6 +6,7 @@ replicaCount: 1
 image:
   plex: linuxserver/plex
   plexTag: latest
+  pullPolicy: IfNotPresent
 
 pvcName:
 
