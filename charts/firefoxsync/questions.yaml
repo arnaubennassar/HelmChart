@@ -39,7 +39,7 @@ questions:
 - variable: secret.key
   required: true
   description: "Secret key for: Firefox sync server key"
-  label: Secret key for: Firefox sync server key
+  label: "Secret key for: Firefox sync server key"
   type: string
   group: "Secrets"
 # HOSTS
