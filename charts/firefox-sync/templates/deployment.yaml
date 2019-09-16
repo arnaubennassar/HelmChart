@@ -24,7 +24,7 @@ spec:
           claimName: {{ .Values.pvcName }}
       containers:
         - name: "{{ .Values.appName }}"
-          image: "{{ .Values.image.firefoxSync }}:{{ .Values.image.firefoxSyncTag }}"
+          image: "{{ .Values.image.firefoxsync }}:{{ .Values.image.firefoxsyncTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - name: {{ .Values.appName }}
@@ -32,7 +32,7 @@ spec:
           volumeMounts:
           - mountPath: /data
             name: {{ .Values.appName }}
-            subPath: firefoxSync/
+            subPath: firefoxsync/
           env:
           - name: SYNCSERVER_PUBLIC_URL
             value: "{{ .Values.host }}:5000"
