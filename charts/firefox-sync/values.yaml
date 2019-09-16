@@ -4,8 +4,8 @@ namespace: default
 replicaCount: 1
 
 image:
-  firefox-sync: mozilla/syncserver
-  firefox-syncTag: latest
+  firefoxSync: mozilla/syncserver
+  firefoxSyncTag: latest
 
 pvcName:
 
