@@ -29,7 +29,7 @@ spec:
         configMap:
           name: traefik-https-cfg
       containers:
-      - image: traefik
+      - image: "{{ .Values.image }}:{{ .Values.tag }}"
         name: traefik-ingress-controller
         resources:
           limits:

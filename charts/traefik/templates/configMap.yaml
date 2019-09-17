@@ -25,18 +25,18 @@ data:
       # caServer = "https://acme-v01.api.letsencrypt.org/directory"
       [acme.httpChallenge]
         entryPoint="http"
-    [file]
-      [backends]
-        [backends.backend1]
-          [backends.backend1.servers]
-            [backends.backend1.servers.server0]
-              url = "https://rancher.nau.qhigh.com"
-
-      [frontends]
-        [frontends.frontend1]
-          entryPoints = ["https"]
-          backend = "backend1"
-          passHostHeader = true
-          [frontends.frontend1.routes]
-            [frontends.frontend1.routes.route0]
-              rule = "Host:rancher.nau.qhigh.com"
+    # [file]
+    #   [backends]
+    #     [backends.backend1]
+    #       [backends.backend1.servers]
+    #         [backends.backend1.servers.server0]
+    #           url = "https://rancher.nau.qhigh.com"
+    #
+    #   [frontends]
+    #     [frontends.frontend1]
+    #       entryPoints = ["https"]
+    #       backend = "backend1"
+    #       passHostHeader = true
+    #       [frontends.frontend1.routes]
+    #         [frontends.frontend1.routes.route0]
+    #           rule = "Host:rancher.nau.qhigh.com"

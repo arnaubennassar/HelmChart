@@ -69,3 +69,16 @@ questions:
   label: Host used to access
   type: string
   group: "Credentials"
+
+- variable: image
+  description: "Container image"
+  label: Container image
+  type: string
+  group: "Image"
+  default: "traefik"
+- variable: image
+  description: "Container image tag"
+  label: Container image tag
+  type: string
+  group: "Image"
+  default: "latest"
