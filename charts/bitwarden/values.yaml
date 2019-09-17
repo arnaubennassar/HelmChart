@@ -1,0 +1,17 @@
+appName: bitwarden
+namespace: default
+
+replicaCount: 1
+
+image:
+  bitwarden: bitwardenrs/server
+  bitwardenTag: latest
+  pullPolicy: IfNotPresent
+
+pvcName:
+
+host:
+
+selector:
+  key:
+  value:

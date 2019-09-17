@@ -1,0 +1,51 @@
+categories:
+- passwords
+- bookmarks
+questions:
+# IMAGE
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  # bitwarden server
+  - variable: image.bitwarden
+    default: "bitwardenrs/server"
+    description: "bitwarden server container image"
+    type: string
+    label: bitwarden server container image
+  - variable: image.bitwardenTag
+    default: "latest"
+    description: "bitwarden server container image tag"
+    type: string
+    label: bitwarden server container image tag
+# STORAGE
+- variable: pvcName
+  required: true
+  description: "Persistent volume claim"
+  label: Persistent volume claim
+  type: string
+  group: "Storage"
+# HOSTS
+- variable: host
+  required: true
+  description: "URL for bitwarden server"
+  label: URL for bitwarden server
+  type: string
+  group: "Hosts"
+# SELECTOR
+- variable: selector.key
+  required: true
+  description: "Key of the node label used to select the node were the pod will run"
+  label: Key of the node label used to select the node were the pod will run
+  type: string
+  group: "Selector"
+- variable: selector.value
+  required: true
+  description: "Value of the key"
+  label: Value of the key
+  type: string
+  group: "Selector"

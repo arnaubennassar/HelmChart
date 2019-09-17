@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    k8s-app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      k8s-app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ .Values.appName }}
+    spec:
+      nodeSelector:
+        {{ .Values.selector.key }}: "{{ .Values.selector.value }}"
+      volumes:
+      - name: {{ .Values.appName }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.pvcName }}
+      containers:
+        - name: "{{ .Values.appName }}"
+          image: "{{ .Values.image.bitwarden }}:{{ .Values.image.bitwardenTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+          - name: {{ .Values.appName }}
+            containerPort: 80
+          volumeMounts:
+          - mountPath: /data
+            name: {{ .Values.appName }}
+            subPath: bitwarden/
