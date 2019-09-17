@@ -17,7 +17,7 @@ spec:
         k8s-app: {{ .Values.appName }}
     spec:
       nodeSelector:
-        {{ .Values.selector.key }}:"{{ .Values.selector.value }}"
+        {{ .Values.selector.key }}: "{{ .Values.selector.value }}"
       volumes:
       - name: nextcloud-v
         persistentVolumeClaim:
