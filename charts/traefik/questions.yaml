@@ -76,7 +76,7 @@ questions:
   type: string
   group: "Image"
   default: "traefik"
-- variable: image
+- variable: tag
   description: "Container image tag"
   label: Container image tag
   type: string
