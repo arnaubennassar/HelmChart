@@ -46,4 +46,4 @@ spec:
           - name: SYNCSERVER_BATCH_UPLOAD_ENABLED
             value: "true"
           - name: SYNCSERVER_FORCE_WSGI_ENVIRON
-            value: "false"
+            value: "true"
