@@ -9,9 +9,9 @@ spec:
   ports:
   - port: 8545
     targetPort: 8545
-    name: {{ .Values.appName }}-API
+    name: {{ .Values.appName }}-api
   - port: 30303
     targetPort: 30303
-    name: {{ .Values.appName }}-P2P
+    name: {{ .Values.appName }}-p2p
   selector:
     k8s-app: {{ .Values.appName }}
