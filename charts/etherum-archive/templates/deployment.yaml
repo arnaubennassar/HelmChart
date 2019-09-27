@@ -28,9 +28,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args: ["--syncmode full", "--gcmode archive", "--rinkeby"]
           ports:
-          - name: {{ .Values.appName }}-api
+          - name: api
             containerPort: 8545
-          - name: {{ .Values.appName }}-p2p
+          - name: p2p
             containerPort: 30303
           volumeMounts:
           - mountPath: /root
