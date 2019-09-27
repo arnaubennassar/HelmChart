@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: {{ .Values.appName }}
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - port: 8545
+    targetPort: 8545
+    name: {{ .Values.appName }}-API
+  - port: 30303
+    targetPort: 30303
+    name: {{ .Values.appName }}-P2P
+  selector:
+    k8s-app: {{ .Values.appName }}

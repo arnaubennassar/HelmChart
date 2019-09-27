@@ -1,0 +1,13 @@
+appName: etherum-node
+namespace: default
+
+replicaCount: 1
+
+image:
+  name: ethereum/client-go
+  tag: latest
+  pullPolicy: IfNotPresent
+
+pvcName:
+
+host:

@@ -1,0 +1,30 @@
+categories:
+- blockchain
+questions:
+# STORAGE
+- variable: pvcName
+  required: true
+  description: "Persistent volume claim for node data"
+  label: Persistent volume claim
+  type: string
+  group: "Storage"
+# HOSTS
+- variable: host
+  required: true
+  description: "URL for etherum server"
+  label: URL for etherum server
+  type: string
+  group: "Hosts"
+# SELECTOR
+- variable: selector.key
+  required: true
+  description: "Key of the node label used to select the node were the pod will run"
+  label: Key of the node label used to select the node were the pod will run
+  type: string
+  group: "Selector"
+- variable: selector.value
+  required: true
+  description: "Value of the key"
+  label: Value of the key
+  type: string
+  group: "Selector"
