@@ -1,23 +1,13 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
+  labels:
+    k8s-app: traefik
   name: traefik
-
+  namespace: default
 spec:
-  type: NodePort
-  externalTrafficPolicy: Cluster
   ports:
-    - protocol: TCP
-      name: web
-      port: 80
-      targetPort: 80
-    - protocol: TCP
-      name: traefik
-      port: 8888
-      targetPort: 8080
-    - protocol: TCP
-      name: websecure
-      port: 443
-      targetPort: 443
+  - port: 80
+    targetPort: 8080
   selector:
-    app: traefik
+    k8s-app: traefik
