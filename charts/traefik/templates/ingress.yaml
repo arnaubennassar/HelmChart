@@ -12,7 +12,7 @@ spec:
       kind: Rule
       services:
         - name: traefik
-          port: 8888
+          port: 8080
       middlewares:
         - name: https-only
   tls:
