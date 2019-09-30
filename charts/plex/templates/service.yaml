@@ -6,6 +6,8 @@ metadata:
   name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}
 spec:
+  type: NodePort
+  externalTrafficPolicy: Cluster
   ports:
   - port: 32400
     targetPort: 32400
