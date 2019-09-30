@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik
+  name: {{ .Values.appName }}
   namespace: default
 spec:
   entryPoints:
@@ -11,7 +11,7 @@ spec:
     - match: Host(`{{ .Values.host }}`)
       kind: Rule
       services:
-        - name: traefik
+        - name: {{ .Values.appName }}
           port: 32400
       middlewares:
         - name: https-only

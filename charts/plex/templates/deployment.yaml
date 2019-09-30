@@ -28,7 +28,7 @@ spec:
           image: "{{ .Values.image.plex }}:{{ .Values.image.plexTag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-          - name: plex
+          - name: {{ .Values.appName }}
             containerPort: 32400
           volumeMounts:
           - mountPath: /config
