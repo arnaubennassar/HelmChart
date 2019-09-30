@@ -2,7 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: {{ .Values.appName }}
-  namespace: default
+  namespace: {{ .Values.namespace }}
 spec:
   entryPoints:
     - web
