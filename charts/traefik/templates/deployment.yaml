@@ -35,9 +35,9 @@ spec:
             - --providers.kubernetescrd
             - --certificatesresolvers.default.acme.tlschallenge
             - --certificatesresolvers.default.acme.email=4nau_acc@protonmail.com
-            - --certificatesresolvers.default.acme.storage=acme.json
+            - --certificatesresolvers.default.acme.storage=/etc/traefik-cache/acme.json
           volumeMounts:
-          - mountPath: /etc/traefik
+          - mountPath: /etc/traefik-cache
             name: traefik-cache
             subPath: traefik/cache
           ports:
