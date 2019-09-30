@@ -17,6 +17,8 @@ spec:
         app: traefik
     spec:
       serviceAccountName: traefik-ingress-controller
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.nodeName }}
       volumes:
       - name: traefik-cache
         persistentVolumeClaim:
