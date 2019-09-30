@@ -17,7 +17,6 @@ spec:
         app: traefik
     spec:
       serviceAccountName: traefik-ingress-controller
-      hostNetwork: true
       nodeSelector:
         kubernetes.io/hostname: {{ .Values.nodeName }}
       volumes:
