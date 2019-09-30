@@ -6,14 +6,14 @@ metadata:
 spec:
   entryPoints:
     - web
-    # - websecure
+    - websecure
   routes:
     - match: Host(`{{ .Values.host }}`)
       kind: Rule
       services:
         - name: traefik
           port: 8080
-  #     middlewares:
-  #       - name: https-only
-  # tls:
-  #   certResolver: default
+      middlewares:
+        - name: https-only
+  tls:
+    certResolver: default
