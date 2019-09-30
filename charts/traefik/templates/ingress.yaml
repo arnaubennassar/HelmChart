@@ -1,16 +1,19 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: traefik-ingress-controller-https
-  namespace: kube-system
-  annotations:
-    kubernetes.io/ingress.class: traefik
+  name: traefik-admin
+  namespace: default
 spec:
-  rules:
-  - host: {{ .Values.host }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: traefik-ingress-controller-https
-          servicePort: 80
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`{{ .Values.host }}`)
+      kind: Rule
+      services:
+        - name: admin
+          port: 8080
+      middlewares:
+        - name: https-only
+  tls:
+    certResolver: default

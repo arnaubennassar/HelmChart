@@ -1,62 +1,47 @@
-apiVersion: v1
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: traefik-ingress-controller-https
-  namespace: kube-system
+  namespace: default
+  name: traefik
   labels:
-    k8s-app: traefik-ingress-controller-https
+    app: traefik
+
 spec:
   replicas: 1
   selector:
     matchLabels:
-      k8s-app: traefik-ingress-controller-https
+      app: traefik
   template:
     metadata:
       labels:
-        k8s-app: traefik-ingress-controller-https
+        app: traefik
     spec:
-      serviceAccount: traefik
-      terminationGracePeriodSeconds: 15
-      hostNetwork: true
-      nodeSelector:
-        kubernetes.io/hostname: {{ .Values.nodeName }}
+      serviceAccountName: traefik-ingress-controller
       volumes:
       - name: traefik-cache
         persistentVolumeClaim:
           claimName: {{ .Values.pvcName }}
-      - name: traefik-config
-        configMap:
-          name: traefik-https-cfg
       containers:
-      - image: "{{ .Values.image }}:{{ .Values.tag }}"
-        name: traefik-ingress-controller
-        resources:
-          limits:
-            cpu: 1500m
-            memory: 30Mi
-          requests:
-            cpu: 100m
-            memory: 20Mi
-        ports:
-        - name: http
-          containerPort: 80
-          hostPort: 80
-        - name: https
-          containerPort: 443
-          hostPort: 443
-        - name: admin
-          containerPort: 8888
-        volumeMounts:
-        - mountPath: /etc/traefik
-          name: traefik-cache
-          subPath: traefik/cache
-        - mountPath: /config-files
-          name: traefik-config
-        args:
-        - --web
-        - --web.address=:8888
-        - --kubernetes
-        - --logLevel=INFO
-        - --configFile=/config-files/traefik.toml
----
+        - name: traefik
+          image: "{{ .Values.image }}:{{ .Values.tag }}"
+          args:
+            - --api.insecure
+            - --accesslog
+            - --entrypoints.web.address=:80
+            - --entrypoints.websecure.address=:443
+            - --api.dashboard=true
+            - --providers.kubernetescrd
+            - --certificatesresolvers.default.acme.tlschallenge
+            - --certificatesresolvers.default.acme.email=4nau_acc@protonmail.com
+            - --certificatesresolvers.default.acme.storage=acme.json
+          volumeMounts:
+          - mountPath: /etc/traefik
+            name: traefik-cache
+            subPath: traefik/cache
+          ports:
+            - name: web
+              containerPort: 80
+            - name: websecure
+              containerPort: 443
+            - name: admin
+              containerPort: 8080
