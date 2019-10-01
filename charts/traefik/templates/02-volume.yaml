@@ -1,0 +1,29 @@
+accessModes:
+- ReadWriteOnce
+annotations:
+  pv.kubernetes.io/bound-by-controller: 'yes'
+baseType: persistentVolume
+capacity:
+  storage: {{ .Values.volume.size }}
+glusterfs:
+  endpoints: gluster
+  path: gluVol
+  readOnly: false
+  type: "/v3/cluster/schemas/glusterfsVolumeSource"
+name: {{ .Values.appName }}
+persistentVolumeReclaimPolicy: Retain
+type: persistentVolume
+volumeMode: Filesystem
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  volumeName: {{ .Values.appName }}
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ Values.volume.size }}

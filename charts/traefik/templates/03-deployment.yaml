@@ -30,7 +30,7 @@ spec:
       volumes:
       - name: traefik-cache
         persistentVolumeClaim:
-          claimName: {{ .Values.pvcName }}
+          claimName: {{ .Values.appName }}
       containers:
         - name: traefik
           image: traefik:v2.0
