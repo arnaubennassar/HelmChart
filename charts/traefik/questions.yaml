@@ -68,12 +68,13 @@ questions:
   group: "Configuration"
 
 # VOLUME
-- variable: volume.pvc
+- variable: volume.size
   required: true
-  description: "name of a PVC used to store tls certificates"
-  label: name of a PVC used to store tls certificates
+  description: "Ammount of storage used for storing TLS certs, expressed in Mi, Gi, Ti"
+  label: Storage size
   type: string
   group: "Storage"
+  default: 1Gi
 - variable: volume.subPath
   required: true
   description: "Subpath within the volume that will be exposed. !Without first and last /!"
