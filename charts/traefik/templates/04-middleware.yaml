@@ -13,4 +13,4 @@ metadata:
 spec:
   basicAuth:
     users:
-    - {{ Values.htpaswd }}
+    - {{ .Values.htpaswd }}

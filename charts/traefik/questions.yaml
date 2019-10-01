@@ -9,7 +9,7 @@ questions:
   type: string
   group: "Configuration"
   default: "default"
-# NAMESPACE
+# APP NAME
 - variable: appName
   required: true
   description: "App name used to reference the application across the resources"
@@ -51,6 +51,14 @@ questions:
   label: HTTPS port
   type: string
   group: "Internet"
+
+# middlewares
+- variable: htpaswd
+  required: true
+  description: "User + Password encrypted by the htpaswd standard (String must be entered encrypted). Used for the basic auth middleware"
+  label: htpasswd middleware
+  type: string
+  group: "Configuration"
 
 # EMAIL
 - variable: email
