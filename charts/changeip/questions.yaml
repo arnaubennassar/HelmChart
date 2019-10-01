@@ -1,0 +1,42 @@
+categories:
+- Bot
+- DDNS
+questions:
+# NAMESPACE
+- variable: namespace
+  required: true
+  description: "namespace"
+  label: namespace
+  type: string
+  group: "Configuration"
+  default: "default"
+
+# Change IP
+- variable: user
+  required: true
+  description: "User name for changeip.com"
+  label: User changeip.com
+  type: string
+  group: "Change IP bot"
+
+- variable: pass
+  required: true
+  description: "Password for changeip.com"
+  label: Password changeip.com
+  type: password
+  group: "Change IP bot"
+
+- variable: record
+  required: true
+  description: "Record to be updated in for changeip.com"
+  label: Record name changeip.com
+  type: string
+  group: "Change IP bot"
+
+- variable: cron
+  required: true
+  description: "Cron expression to schedule changeip.com DDNS records refresh"
+  label: Cron expression
+  type: string
+  group: "Change IP bot"
+  default: "10 * * * *"
