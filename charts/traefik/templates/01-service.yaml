@@ -2,22 +2,17 @@ apiVersion: v1
 kind: Service
 metadata:
   name: traefik
-  namespace: default
+
 spec:
-  type: NodePort
-  externalTrafficPolicy: Cluster
   ports:
     - protocol: TCP
       name: web
-      port: 80
-      targetPort: 80
+      port: 8000
     - protocol: TCP
-      name: traefik
+      name: admin
       port: 8080
-      targetPort: 8080
     - protocol: TCP
       name: websecure
-      port: 443
-      targetPort: 443
+      port: 4443
   selector:
     app: traefik
