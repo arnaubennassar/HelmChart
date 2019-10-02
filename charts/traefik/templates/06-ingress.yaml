@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`devtraefik.nau.qhigh.com`)
+    kind: Rule
+    services:
+    - name: {{ .Values.appName }}
+      port: 8080

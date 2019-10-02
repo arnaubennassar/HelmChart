@@ -55,5 +55,5 @@ spec:
               containerPort: {{ .Values.ports.http }}
             - name: websecure
               containerPort: {{ .Values.ports.https }}
-            - name: admin
+            - name: {{ .Values.appName }}
               containerPort: 8080

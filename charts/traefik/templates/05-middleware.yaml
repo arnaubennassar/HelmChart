@@ -5,19 +5,20 @@ metadata:
 spec:
   redirectScheme:
     scheme: https
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: traefik-htpaswd
-type: Opaque
-stringData:
-  users: {{ .Values.htpaswd }}
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: htpaswd
-spec:
-  basicAuth:
-    secret: traefik-htpaswd
+# ---
+# TODO: ENABLE THIS MIDDLEWARE
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: traefik-htpaswd
+# type: Opaque
+# stringData:
+#   users: {{ .Values.htpaswd }}
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: htpaswd
+# spec:
+#   basicAuth:
+#     secret: traefik-htpaswd

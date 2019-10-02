@@ -9,7 +9,7 @@ spec:
       name: web
       port: {{ .Values.ports.http }}
     - protocol: TCP
-      name: admin
+      name: {{ .Values.appName }}
       port: 8080
     - protocol: TCP
       name: websecure
