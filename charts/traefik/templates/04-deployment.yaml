@@ -9,19 +9,19 @@ kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   namespace: {{ .Values.namespace }}
-  name: traefik
+  name: {{ .Values.appName }}
   labels:
-    app: traefik
+    app: {{ .Values.appName }}
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: traefik
+      app: {{ .Values.appName }}
   template:
     metadata:
       labels:
-        app: traefik
+        app: {{ .Values.appName }}
     spec:
       serviceAccountName: traefik-ingress-controller
       hostNetwork: true
@@ -32,8 +32,8 @@ spec:
         persistentVolumeClaim:
           claimName: {{ .Values.appName }}
       containers:
-        - name: traefik
-          image: traefik:v2.0
+        - name: {{ .Values.appName }}
+          image: {{ .Values.image }}:{{ .Values.tag }}
           args:
             - --api.insecure
             - --accesslog
