@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`devtraefik.nau.qhigh.com`)
+  - match: Host(`{{ .Values.host }}`)
     kind: Rule
     services:
     - name: {{ .Values.appName }}
