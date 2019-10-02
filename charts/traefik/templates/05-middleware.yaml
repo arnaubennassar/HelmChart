@@ -11,7 +11,8 @@ kind: Secret
 metadata:
   name: traefik-htpaswd
 type: Opaque
-stringData: {{ .Values.htpaswd }}
+stringData:
+  users: {{ .Values.htpaswd }}
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
