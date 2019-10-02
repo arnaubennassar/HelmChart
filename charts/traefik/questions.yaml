@@ -56,7 +56,7 @@ questions:
 - variable: htpaswd
   required: true
   description: "User + Password encrypted by the htpaswd standard (String must be entered encrypted). Used for the basic auth middleware"
-  label: htpasswd middleware
+  label: htpaswd middleware
   type: string
   group: "Configuration"
 
