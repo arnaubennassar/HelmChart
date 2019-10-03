@@ -42,7 +42,7 @@ spec:
             - --accesslog
             - --providers.kubernetesingress.ingressclass="traefik"
             - --entrypoints.web.Address=:{{ .Values.ports.http }}
-            - --entrypoints.web.redirect.address=:{{ .Values.ports.https }}
+            # - --entrypoints.web.redirect.address=:{{ .Values.ports.https }}
             - --entrypoints.websecure.Address=:{{ .Values.ports.https }}
             - --providers.kubernetesingress=true
             - --certificatesresolvers.default.acme.tlschallenge
