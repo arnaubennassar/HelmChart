@@ -40,7 +40,6 @@ spec:
             - --entrypoints.web.Address=:{{ .Values.ports.http }}
             - --entrypoints.websecure.Address=:{{ .Values.ports.https }}
             - --providers.kubernetesingress=true
-            - --providers.kubernetesingress.namespaces="{{ .Values.namespace }}"
             - --certificatesresolvers.default.acme.tlschallenge
             - --certificatesresolvers.default.acme.email={{ .Values.email }}
             - --certificatesresolvers.default.acme.storage=/etc/traefik-cache/acme.json
