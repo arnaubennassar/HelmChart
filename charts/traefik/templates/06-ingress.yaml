@@ -1,32 +1,32 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: {{ .Values.appName }}
-spec:
-  entryPoints:
-    - web
-  routes:
-  - match: Host(`{{ .Values.host }}`)
-    kind: Rule
-  middlewares:
-  - name: htpaswd
-  services:
-  - name: {{ .Values.appName }}
-    port: 8080
-
-# apiVersion: extensions/v1beta1
-# kind: Ingress
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
 # metadata:
 #   name: {{ .Values.appName }}
-#   namespace: {{ .Values.namespace }}
-#   annotations:
-#     kubernetes.io/ingress.class: traefik
 # spec:
-#   rules:
-#   - host: {{ .Values.host }}
-#     http:
-#       paths:
-#       - path: /
-#         backend:
-#           serviceName: {{ .Values.appName }}
-#           servicePort: 8080
+#   entryPoints:
+#     - web
+#   routes:
+#   - match: Host(`{{ .Values.host }}`)
+#     kind: Rule
+#   middlewares:
+#   - name: htpaswd
+#   services:
+#   - name: {{ .Values.appName }}
+#     port: 8080
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: {{ .Values.host }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Values.appName }}
+          servicePort: 8080
