@@ -36,7 +36,8 @@ apiVersion: extensions/v1beta1
 metadata:
   name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}
-
+  annotations:
+    kubernetes.io/ingress.class: traefik
 spec:
   rules:
     - host: {{ .Values.host }}
