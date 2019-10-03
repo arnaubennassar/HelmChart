@@ -8,8 +8,8 @@ spec:
   routes:
   - match: Host(`{{ .Values.host }}`)
     kind: Rule
-  middlewares:
-  - name: htpaswd
+  # middlewares:
+  # - name: htpaswd
   services:
   - name: {{ .Values.appName }}
     port: 8080
