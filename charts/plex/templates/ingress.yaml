@@ -1,18 +1,16 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: extensions/v1beta1
+kind: Ingress
 metadata:
   name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
 spec:
-  entryPoints:
-    - web
-    # - websecure
-  routes:
-  - match: Host(`{{ .Values.host }}`)
-    kind: Rule
-    services:
-    - name: {{ .Values.appName }}
-      port: 32400
-  # middlewares:
-  #   - name: https-only
-# tls:
-#   certResolver: default
+  rules:
+  - host: {{ .Values.host }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Values.appName }}
+          servicePort: 32400
