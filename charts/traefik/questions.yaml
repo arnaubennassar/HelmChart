@@ -8,6 +8,58 @@ questions:
   label: namespace
   type: string
   group: "Configuration"
+  default: "default"
+# APP NAME
+- variable: appName
+  required: true
+  description: "App name used to reference the application across the resources"
+  label: App name
+  type: string
+  group: "Configuration"
+  default: "traefik"
+
+#IMAGE
+- variable: image
+  description: "Container image"
+  label: Container image
+  type: string
+  group: "Image"
+  default: "traefik"
+- variable: tag
+  description: "Container image tag"
+  label: Container image tag
+  type: string
+  group: "Image"
+  default: "latest"
+
+# PORTS & HOST
+- variable: host
+  required: true
+  description: "External URL to access the admin page"
+  label: Domain Name
+  type: string
+  group: "Internet"
+- variable: ports.http
+  required: true
+  description: "Port used to handle HTTP requests by traefik"
+  label: HTTP port
+  type: string
+  group: "Internet"
+- variable: ports.https
+  required: true
+  description: "Port used to handle HTTPS requests by traefik"
+  label: HTTPS port
+  type: string
+  group: "Internet"
+
+# middlewares
+- variable: htpaswd
+  required: true
+  description: "User + Password encrypted by the htpaswd standard (String must be entered encrypted). Used for the basic auth middleware"
+  label: htpaswd middleware
+  type: string
+  group: "Configuration"
+
 # EMAIL
 - variable: email
   required: true
@@ -22,63 +74,18 @@ questions:
   label: node name in wich the LB will be deployed
   type: string
   group: "Configuration"
-# PVC
-- variable: pvcName
-  required: true
-  description: "name of a PVC used to store tls certificates"
-  label: name of a PVC used to store tls certificates
-  type: string
-  group: "Configuration"
 
-# CREDENTIALS
-- variable: secret.name
+# VOLUME
+- variable: volume.size
   required: true
-  description: "Secret name containig user, password and record for changeip.com"
-  label: Secret name containig user, password and record for changeip.com
+  description: "Ammount of storage used for storing TLS certs, expressed in Mi, Gi, Ti"
+  label: Storage size
   type: string
-  group: "Credentials"
-- variable: secret.userKey
+  group: "Storage"
+  default: 1Gi
+- variable: volume.subPath
   required: true
-  description: "Key of the secret that contains the user name for changeip.com"
-  label: Key of the secret that contains the user name for changeip.com
+  description: "Subpath within the volume that will be exposed. !Without first and last /!"
+  label: Volume subPath
   type: string
-  group: "Credentials"
-- variable: secret.passwordKey
-  required: true
-  description: "Key of the secret that contains the password for changeip.com"
-  label: Key of the secret that contains the password for changeip.com
-  type: string
-  group: "Credentials"
-- variable: secret.recordKey
-  required: true
-  description: "Key of the secret that contains the record to be updated in for changeip.com"
-  label: Key of the secret that contains the record to be updated in for changeip.com
-  type: string
-  group: "Credentials"
-# CRONJOB
-- variable: cron
-  description: "Cron expression to schedule the changeip IP refresh"
-  label: Cron expression to schedule the changeip IP refresh
-  type: string
-  group: "Schedule"
-  default: "10 * * * *"
-
-- variable: host
-  required: true
-  description: "Host used to access"
-  label: Host used to access
-  type: string
-  group: "Credentials"
-
-- variable: image
-  description: "Container image"
-  label: Container image
-  type: string
-  group: "Image"
-  default: "traefik"
-- variable: tag
-  description: "Container image tag"
-  label: Container image tag
-  type: string
-  group: "Image"
-  default: "latest"
+  group: "Storage"

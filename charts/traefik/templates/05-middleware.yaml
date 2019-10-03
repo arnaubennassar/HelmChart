@@ -1,0 +1,24 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-only
+spec:
+  redirectScheme:
+    scheme: https
+---
+# TODO: ENABLE THIS MIDDLEWARE: https://github.com/ldez/traefik/blob/1fdde63d727340b737d6ef96983794b13f4c98b3/docs/content/middlewares/basicauth.md
+apiVersion: v1
+kind: Secret
+metadata:
+  name: traefik-htpaswd
+type: Opaque
+stringData:
+  users: {{ .Values.htpaswd }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: htpaswd
+spec:
+  basicAuth:
+    secret: traefik-htpaswd
