@@ -14,19 +14,35 @@
 #   - name: {{ .Values.appName }}
 #     port: 8080
 
-apiVersion: extensions/v1beta1
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: {{ .Values.appName }}
+#   namespace: {{ .Values.namespace }}
+#   annotations:
+#     kubernetes.io/ingress.class: traefik
+# spec:
+#   rules:
+#   - host: {{ .Values.host }}
+#     http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: {{ .Values.appName }}
+#           servicePort: 8080
+
 kind: Ingress
+apiVersion: extensions/v1beta1
 metadata:
   name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}
-  annotations:
-    kubernetes.io/ingress.class: traefik
+
 spec:
   rules:
-  - host: {{ .Values.host }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: {{ .Values.appName }}
-          servicePort: 8080
+    - host: {{ .Values.host }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ .Values.appName }}
+              servicePort: 8080
