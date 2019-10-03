@@ -21,7 +21,7 @@ spec:
       volumes:
       - name: piflix-v
         persistentVolumeClaim:
-          claimName: {{ .Values.pvcName }}
+          claimName: {{ .Values.appName }}
       containers:
 # PLEX
         - name: "plex"
