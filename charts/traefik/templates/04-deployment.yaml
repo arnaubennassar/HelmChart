@@ -35,12 +35,11 @@ spec:
         - name: {{ .Values.appName }}
           image: {{ .Values.image }}:{{ .Values.tag }}
           args:
-            - --api.insecure
             - --accesslog
             - --entrypoints.web.Address=:{{ .Values.ports.http }}
             - --entrypoints.websecure.Address=:{{ .Values.ports.https }}
             - --providers.kubernetesingress=true
-            - --providers.kubernetesingress.namespaces="{{ .Values.namespace }}"
+            - --providers.kubernetesingress.namespaces="dev"
             - --certificatesresolvers.default.acme.tlschallenge
             - --certificatesresolvers.default.acme.email={{ .Values.email }}
             - --certificatesresolvers.default.acme.storage=/etc/traefik-cache/acme.json
