@@ -35,14 +35,20 @@ spec:
         - name: {{ .Values.appName }}
           image: {{ .Values.image }}:{{ .Values.tag }}
           args:
+            # - --metrics.prometheus=true
+            # - --entryPoints.metrics.address=":8082"
+            # - --metrics.prometheus..entryPoint="metrics"
             - --api.insecure
             - --accesslog
             - --entrypoints.web.Address=:{{ .Values.ports.http }}
+            - --entrypoints.web.Redirect.Address=:{{ .Values.ports.https }}
             - --entrypoints.websecure.Address=:{{ .Values.ports.https }}
             - --providers.kubernetesingress=true
             - --certificatesresolvers.default.acme.tlschallenge
             - --certificatesresolvers.default.acme.email={{ .Values.email }}
             - --certificatesresolvers.default.acme.storage=/etc/traefik-cache/acme.json
+            - --certificatesResolvers.default.acme.onHostRule=true
+            - --certificatesResolvers.default.acme.httpChallenge.entryPoint=web
             # Please note that this is the staging Let's Encrypt server.
             # Once you get things working, you should remove that whole line altogether.
             - --certificatesresolvers.default.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
