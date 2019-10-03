@@ -47,7 +47,7 @@ questions:
   group: "Storage"
   default: 1Ti
 # HOSTS
-- variable: host.plex
+- variable: host
   required: true
   description: "URL for plex"
   label: URL for plex
