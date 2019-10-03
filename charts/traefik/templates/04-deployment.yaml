@@ -41,7 +41,7 @@ spec:
             - --api.insecure
             - --accesslog
             - --entrypoints.web.Address=:{{ .Values.ports.http }}
-            - --entrypoints.web.Redirect.Address=:{{ .Values.ports.https }}
+            - --entrypoints.web.redirect.address=:{{ .Values.ports.https }}
             - --entrypoints.websecure.Address=:{{ .Values.ports.https }}
             - --providers.kubernetesingress=true
             - --certificatesresolvers.default.acme.tlschallenge
