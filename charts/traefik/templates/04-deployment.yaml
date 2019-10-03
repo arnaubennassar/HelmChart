@@ -35,6 +35,7 @@ spec:
         - name: {{ .Values.appName }}
           image: {{ .Values.image }}:{{ .Values.tag }}
           args:
+            - --api.insecure
             - --accesslog
             - --entrypoints.web.Address=:{{ .Values.ports.http }}
             - --entrypoints.websecure.Address=:{{ .Values.ports.https }}
