@@ -23,12 +23,13 @@ questions:
     type: string
     label: plex container image tag
 # STORAGE
-- variable: pvcName
+- variable: volume.size
   required: true
-  description: "Persistent volume claim"
-  label: Persistent volume claim
+  description: "Ammount of storage used for storing TLS certs, expressed in Mi, Gi, Ti"
+  label: Storage size
   type: string
   group: "Storage"
+  default: 1Ti
 # HOSTS
 - variable: host.plex
   required: true
