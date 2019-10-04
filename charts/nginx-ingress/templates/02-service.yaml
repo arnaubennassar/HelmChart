@@ -7,15 +7,12 @@ metadata:
     app.kubernetes.io/name: {{ .Values.namespace }}
     app.kubernetes.io/part-of: {{ .Values.namespace }}
 spec:
-  type: NodePort
   ports:
     - name: http
       port: 80
-      targetPort: 80
       protocol: TCP
     - name: https
       port: 443
-      targetPort: 443
       protocol: TCP
   selector:
     app.kubernetes.io/name: {{ .Values.namespace }}
