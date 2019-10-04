@@ -1,0 +1,55 @@
+categories:
+- LB
+questions:
+# NAMESPACE
+- variable: namespace
+  required: true
+  description: "namespace"
+  label: namespace
+  type: string
+  group: "Configuration"
+  default: "nginx-ingress"
+
+#IMAGE
+- variable: image
+  description: "Container image"
+  label: Container image
+  type: string
+  group: "Image"
+  default: "traefik"
+- variable: tag
+  description: "Container image tag"
+  label: Container image tag
+  type: string
+  group: "Image"
+  default: "latest"
+
+# EMAIL
+- variable: email
+  required: true
+  description: "contact email for let's encrypt bot"
+  label: contact email for let's encrypt bot
+  type: string
+  group: "Configuration"
+# NODE NAME
+- variable: nodeName
+  required: true
+  description: "node name in wich the LB will be deployed"
+  label: node name in wich the LB will be deployed
+  type: string
+  group: "Configuration"
+
+# VOLUME
+- variable: volume.size
+  required: true
+  description: "Ammount of storage used for storing TLS certs, expressed in Mi, Gi, Ti"
+  label: Storage size
+  type: string
+  group: "Storage"
+  default: 1Gi
+- variable: volume.subPath
+  required: true
+  description: "Subpath within the volume that will be exposed. !Without first and last /!"
+  label: Volume subPath
+  type: string
+  group: "Storage"
