@@ -13,5 +13,3 @@ spec:
       name: example-issuer-account-key
     solvers:
     - http01:
-        ingress:
-          class: nginx
