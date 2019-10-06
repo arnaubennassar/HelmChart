@@ -1,0 +1,1 @@
+# MUST BE DEPLOYED AT NAMESPACE: kube-system
