@@ -8137,10 +8137,12 @@ spec:
         helm.sh/chart: cainjector-v0.10.1
       annotations:
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: "arm64"
       serviceAccountName: cert-manager-cainjector
       containers:
         - name: cainjector
-          image: "quay.io/jetstack/cert-manager-cainjector:v0.10.1"
+          image: "quay.io/jetstack/cert-manager-cainjector-arm64:v0.10.1"
           imagePullPolicy: IfNotPresent
           args:
           - --v=2
@@ -8188,10 +8190,12 @@ spec:
         prometheus.io/scrape: 'true'
         prometheus.io/port: '9402'
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: "arm64"
       serviceAccountName: cert-manager
       containers:
         - name: cert-manager
-          image: "quay.io/jetstack/cert-manager-controller:v0.10.1"
+          image: "quay.io/jetstack/cert-manager-controller-arm64:v0.10.1"
           imagePullPolicy: IfNotPresent
           args:
           - --v=2
@@ -8245,10 +8249,12 @@ spec:
         helm.sh/chart: cert-manager-v0.10.1
       annotations:
     spec:
+      nodeSelector:
+        beta.kubernetes.io/arch: "arm64"
       serviceAccountName: cert-manager-webhook
       containers:
         - name: cert-manager
-          image: "quay.io/jetstack/cert-manager-webhook:v0.10.1"
+          image: "quay.io/jetstack/cert-manager-webhook-arm64:v0.10.1"
           imagePullPolicy: IfNotPresent
           args:
           - --v=2

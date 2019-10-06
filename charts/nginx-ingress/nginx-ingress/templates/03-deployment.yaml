@@ -27,6 +27,7 @@ spec:
       serviceAccountName: nginx-ingress-serviceaccount
       nodeSelector:
         kubernetes.io/hostname: {{ .Values.nodeName }}
+        beta.kubernetes.io/arch: "arm64"
       containers:
         - name: nginx-ingress-controller
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller-arm64:0.26.1
