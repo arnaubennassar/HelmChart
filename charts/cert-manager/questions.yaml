@@ -1,0 +1,15 @@
+categories:
+- TLS
+- SSL
+- HTTPS
+- let's encrypt
+
+questions:
+# NAMESPACE
+- variable: namespace
+  required: true
+  description: "namespace"
+  label: namespace
+  type: string
+  group: "Configuration"
+  default: "nginx-ingress"
