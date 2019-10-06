@@ -3,3 +3,12 @@ categories:
 - SSL
 - HTTPS
 - let's encrypt
+
+questions:
+# EMAIL
+- variable: email
+  required: true
+  description: "contact email for let's encrypt bot"
+  label: contact email for let's encrypt bot
+  type: string
+  group: "Configuration"
