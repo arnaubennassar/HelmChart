@@ -8,8 +8,8 @@ spec:
     # Let's Encrypt will use this to contact you about expiring
     # certificates, and issues related to your account.
     email: {{ .Values.email }}
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: example-issuer-account-key
+      name: letsencrypt
     solvers:
     - http01:

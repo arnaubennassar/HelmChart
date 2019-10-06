@@ -16,4 +16,4 @@ spec:
   tls:
     - hosts:
       - {{ .Values.host }}
-      secretName: "{{ .Values.appName }}-cert"
+      secretName: "letsencrypt"
