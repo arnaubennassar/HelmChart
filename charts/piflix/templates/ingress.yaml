@@ -6,6 +6,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
+  tls:
+    - hosts:
+      - {{ .Values.host.transmission }}
+      - {{ .Values.host.sonarr }}
+      - {{ .Values.host.radarr }}
+      - {{ .Values.host.jackett }}
+      secretName: "{{ .Values.appName }}-cert"
   rules:
   - host: {{ .Values.host.transmission }}
     http:
@@ -42,17 +49,3 @@ spec:
         backend:
           serviceName: {{ .Values.appName }}
           servicePort: 9117
-  # - host: {{ .Values.host.jellyfin }}
-  #   http:
-  #     paths:
-  #     - path: /
-  #       backend:
-  #         serviceName: {{ .Values.appName }}
-  #         servicePort: 8096
-  # - host: {{ .Values.host.plex }}
-  #   http:
-  #     paths:
-  #     - path: /
-  #       backend:
-  #         serviceName: {{ .Values.appName }}
-  #         servicePort: 32400
