@@ -38,4 +38,4 @@ spec:
             subPath: jellyfin/cache
           - mountPath: /data
             name: {{ .Values.appName }}
-            subPath: /data
+            subPath: data
