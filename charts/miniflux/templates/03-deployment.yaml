@@ -52,7 +52,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.appName }}
-                key: posgres-url
+                key: posgresurl
           - name: RUN_MIGRATIONS
             value: "1"
           - name: CREATE_ADMIN

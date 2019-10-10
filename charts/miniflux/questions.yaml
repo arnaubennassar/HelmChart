@@ -64,7 +64,7 @@ questions:
   type: password
   group: "Secrets"
 
-- variable: posgres-url
+- variable: posgresurl
   required: true
   description: "URL for Postgres access: postgres://-User-:-Password-@db/miniflux?sslmode=disable"
   label: Posgres URL
