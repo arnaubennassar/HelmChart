@@ -34,7 +34,7 @@ spec:
             name: {{ .Values.appName }}
           env:
           - name: POSTGRES_DB
-            value: miniflux
+            value: "miniflux"
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
