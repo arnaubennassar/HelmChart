@@ -24,7 +24,7 @@ spec:
           claimName: {{ .Values.appName }}
   # Posgres
       containers:
-        - name: "miniflux"
+        - name: {{ .Values.appName }}-postgres
           image: "{{ .Values.image.posgres }}:{{ .Values.image.posgresTag }}"
           ports:
           volumeMounts:
@@ -42,7 +42,7 @@ spec:
                 name: {{ .Values.appName }}
                 key: pass
     # miniflux
-        - name: "miniflux"
+        - name: {{ .Values.appName }}-miniflux
           image: "{{ .Values.image.miniflux }}:{{ .Values.image.minifluxTag }}"
           ports:
           - name: {{ .Values.appName }}
