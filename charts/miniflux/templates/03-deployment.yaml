@@ -25,7 +25,7 @@ spec:
   # Posgres
       containers:
         - name: {{ .Values.appName }}-postgres
-          image: "{{ .Values.image.posgres }}:{{ .Values.image.posgresTag }}"
+          image: "{{ .Values.image.postgres }}:{{ .Values.image.postgresTag }}"
           ports:
           volumeMounts:
           - mountPath: /var/lib/postgresql/data

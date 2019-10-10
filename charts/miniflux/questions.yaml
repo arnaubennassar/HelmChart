@@ -48,7 +48,7 @@ questions:
     default: "latest"
     description: "postgres container image tag"
     type: string
-    label: plex container image tag
+    label: postgres container image tag
 # SECRETS
 - variable: user
   required: true
