@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    k8s-app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      k8s-app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ .Values.appName }}
+    spec:
+      nodeSelector:
+        {{ .Values.selector.key }}: "{{ .Values.selector.value }}"
+      volumes:
+      - name: {{ .Values.appName }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.appName }}
+  # Posgres
+      containers:
+        - name: "miniflux"
+          image: "{{ .Values.image.posgres }}:{{ .Values.image.posgresTag }}"
+          ports:
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: {{ .Values.appName }}
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.appName }}
+                key: user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.appName }}
+                key: pass
+    # miniflux
+        - name: "miniflux"
+          image: "{{ .Values.image.miniflux }}:{{ .Values.image.minifluxTag }}"
+          ports:
+          - name: {{ .Values.appName }}
+            containerPort: 8080
+          env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.appName }}
+                key: posgres-url
+          - name: RUN_MIGRATIONS
+            value: 1
+          - name: CREATE_ADMIN
+            value: 1
+          - name: ADMIN_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.appName }}
+                key: user
+          - name: ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.appName }}
+                key: pass

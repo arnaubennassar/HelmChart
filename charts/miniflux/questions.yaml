@@ -1,0 +1,100 @@
+categories:
+- media
+- streaming
+questions:
+# NAMESPACE
+- variable: namespace
+  required: true
+  description: "namespace"
+  label: namespace
+  type: string
+  group: "Configuration"
+  default: "default"
+# APP NAME
+- variable: appName
+  required: true
+  description: "App name used to reference the application across the resources"
+  label: App name
+  type: string
+  group: "Configuration"
+  default: "miniflux"
+# IMAGE
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  # miniflux
+  - variable: image.miniflux
+    default: "miniflux/miniflux"
+    description: "miniflux container image"
+    type: string
+    label: miniflux container image
+  - variable: image.minifluxTag
+    default: "latest"
+    description: "miniflux container image tag"
+    type: string
+    label: miniflux container image tag
+  # postgres
+  - variable: image.postgres
+    default: "postgres"
+    description: "postgres container image"
+    type: string
+    label: postgres container image
+  - variable: image.postgresTag
+    default: "latest"
+    description: "postgres container image tag"
+    type: string
+    label: plex container image tag
+# SECRETS
+- variable: user
+  required: true
+  description: "User for Postgres"
+  label: User
+  type: password
+  group: "Secrets"
+
+- variable: pass
+  required: true
+  description: "Password for Postgres"
+  label: Password
+  type: password
+  group: "Secrets"
+
+- variable: posgres-url
+  required: true
+  description: "URL for Postgres access: postgres://-User-:-Password-@db/miniflux?sslmode=disable"
+  label: Posgres URL
+  type: password
+  group: "Secrets"
+# STORAGE
+- variable: volume.size
+  required: true
+  description: "Ammount of storage used for storing TLS certs, expressed in Mi, Gi, Ti"
+  label: Storage size
+  type: string
+  group: "Storage"
+  default: 1Ti
+# HOSTS
+- variable: host
+  required: true
+  description: "URL for miniflux"
+  label: URL for miniflux
+  type: string
+  group: "Hosts"
+# SELECTOR
+- variable: selector.key
+  required: true
+  description: "Key of the node label used to select the node were the pod will run"
+  label: Key of the node label used to select the node were the pod will run
+  type: string
+  group: "Selector"
+- variable: selector.value
+  required: true
+  description: "Value of the key"
+  label: Value of the key
+  type: string
+  group: "Selector"
