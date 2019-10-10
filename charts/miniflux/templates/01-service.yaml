@@ -9,6 +9,9 @@ spec:
   ports:
   - port: 8080
     targetPort: 8080
-    name: {{ .Values.appName }}
+    name: miniflux
+  - port: 5432
+    targetPort: 5432
+    name: postgres
   selector:
     k8s-app: {{ .Values.appName }}

@@ -22,7 +22,7 @@ spec:
       - name: {{ .Values.appName }}
         persistentVolumeClaim:
           claimName: {{ .Values.appName }}
-  # Posgres
+  # Postgres
       containers:
         - name: {{ .Values.appName }}-postgres
           image: "{{ .Values.image.postgres }}:{{ .Values.image.postgresTag }}"
@@ -54,7 +54,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.appName }}
-                key: posgresurl
+                key: postgresurl
           - name: RUN_MIGRATIONS
             value: "1"
           - name: CREATE_ADMIN
