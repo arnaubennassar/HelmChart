@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Values.appName }}
+  annotations:
+    certmanager.k8s.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+  - host: {{ .Values.host }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Values.appName }}
+          servicePort: 5232
+  tls:
+    - hosts:
+      - {{ .Values.host }}
+      secretName: "{{ .Values.appName }}-cert"
