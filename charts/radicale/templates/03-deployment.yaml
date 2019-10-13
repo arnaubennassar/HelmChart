@@ -19,9 +19,15 @@ spec:
       nodeSelector:
         {{ .Values.selector.key }}: "{{ .Values.selector.value }}"
       volumes:
-      - name: {{ .Values.appName }}
+      - name: {{ .Values.appName }}-data
         persistentVolumeClaim:
           claimName: {{ .Values.appName }}
+      - name: {{ .Values.appName }}-config
+        configMap:
+          name: {{ .Values.appName }}
+      - name: {{ .Values.appName }}-secret
+        secret:
+          secretName: {{ .Values.appName }}
       containers:
         - name: {{ .Values.appName }}
           image: "{{ .Values.image }}:{{ .Values.tag }}"
@@ -30,9 +36,10 @@ spec:
             containerPort: 5232
           volumeMounts:
           - mountPath: /data
-            name: {{ .Values.appName }}
-            subPath: data
+            name: {{ .Values.appName }}-data
           volumeMounts:
           - mountPath: /config
-            name: {{ .Values.appName }}
-            subPath: config
+            name: {{ .Values.appName }}-config
+          volumeMounts:
+          - mountPath: /secret
+            name: {{ .Values.appName }}-secret

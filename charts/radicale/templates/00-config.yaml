@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.appName }}
+type: Opaque
+stringData:
+  htpasswd: {{ .Values.users }}
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+data:
+  config: |
+[server]
+hosts = 0.0.0.0:5232
+[storage]
+filesystem_folder = /data/collections
+[auth]
+type = htpasswd
+# /secret must match the path used in the volumeMounts
+# /htpasswd must match the hey of the sercret
+htpasswd_filename = /secret/htpasswd
+htpasswd_encryption = plain

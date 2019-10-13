@@ -65,3 +65,10 @@ questions:
   label: Selector value
   type: string
   group: "Selector"
+# SECRETS
+- variable: users
+  required: true
+  description: "Users for Radicale: provide the content of a manully generated htpasswd file, unecrypted (in plain text). Note that the provided content will be stored in a K8S secret, so encrypted."
+  label: Users
+  type: password
+  group: "Secrets"
