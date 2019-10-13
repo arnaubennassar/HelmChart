@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.appName }}
 type: Opaque
 stringData:
-  htpasswd: {{ .Values.users }}
+  htpasswd: "{{ .Values.users }}"
 
 ---
 
