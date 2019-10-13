@@ -5,9 +5,7 @@ metadata:
 type: Opaque
 stringData:
   htpasswd: "{{ .Values.users }}"
-
 ---
-
 kind: ConfigMap
 apiVersion: v1
 metadata:
