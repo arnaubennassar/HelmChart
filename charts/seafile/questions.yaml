@@ -44,7 +44,7 @@ questions:
     description: "mariadb container image"
     type: string
     label: mariadb container image
-  - variable: image.mariadbsTag
+  - variable: image.mariadbTag
     default: "latest"
     description: "mariadb container image tag"
     type: string
@@ -81,8 +81,8 @@ questions:
 # HOSTS
 - variable: host
   required: true
-  description: "URL for miniflux"
-  label: URL for miniflux
+  description: "URL for seafile"
+  label: URL for seafile
   type: string
   group: "Hosts"
 # SELECTOR
