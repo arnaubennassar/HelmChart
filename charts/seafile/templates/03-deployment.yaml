@@ -34,7 +34,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.appName }}
-                key: mariadb-root-pass
+                key: mariadbrootpass
           volumeMounts:
           - mountPath: /var/lib/mysql
             name: {{ .Values.appName }}
@@ -60,12 +60,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.appName }}
-                key: seafile-user
+                key: seafileuser
           - name: SEAFILE_ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.appName }}
-                key: seafile-pass
+                key: seafilepass
           volumeMounts:
           - mountPath: /shared
             name: {{ .Values.appName }}

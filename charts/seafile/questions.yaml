@@ -51,20 +51,20 @@ questions:
     label: mariadb container image tag
 # SECRETS
 # mariadb
-- variable: mariadb-root-pass
+- variable: mariadbrootpass
   required: true
   description: "Password for MariaDB root user"
   label: MariaDB Root Password
   type: password
   group: "Secrets"
 # seafile
-- variable: seafile-user
+- variable: seafileuser
   required: true
   description: "User for Seafile"
   label: Seafile User
   type: password
   group: "Secrets"
-- variable: seafile-pass
+- variable: seafilepass
   required: true
   description: "Password for Seafile"
   label: Seafile Password
