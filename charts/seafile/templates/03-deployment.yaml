@@ -54,8 +54,6 @@ spec:
           env:
           - name: DB_HOST
             value: {{ .Values.appName }}
-          - name: TIME_ZONE
-            value: Europe/Madrid
           - name: SEAFILE_ADMIN_EMAIL
             valueFrom:
               secretKeyRef:
