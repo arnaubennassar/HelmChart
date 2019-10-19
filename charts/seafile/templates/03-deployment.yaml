@@ -64,6 +64,11 @@ spec:
               secretKeyRef:
                 name: {{ .Values.appName }}
                 key: seafilepass
+          - name: DB_ROOT_PASSWD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.appName }}
+                key: mariadbrootpass
           volumeMounts:
           - mountPath: /shared
             name: {{ .Values.appName }}
