@@ -1,0 +1,100 @@
+categories:
+- media
+- streaming
+questions:
+# NAMESPACE
+- variable: namespace
+  required: true
+  description: "namespace"
+  label: namespace
+  type: string
+  group: "Configuration"
+  default: "default"
+# APP NAME
+- variable: appName
+  required: true
+  description: "App name used to reference the application across the resources"
+  label: App name
+  type: string
+  group: "Configuration"
+  default: "seafile"
+# IMAGE
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  # seafile
+  - variable: image.seafile
+    default: "seafileltd/seafile"
+    description: "seafile container image"
+    type: string
+    label: seafile container image
+  - variable: image.seafileTag
+    default: "latest"
+    description: "seafile container image tag"
+    type: string
+    label: seafile container image tag
+  # mariadb
+  - variable: image.mariadb
+    default: "webhippie/mariadb"
+    description: "mariadb container image"
+    type: string
+    label: mariadb container image
+  - variable: image.mariadbsTag
+    default: "latest"
+    description: "mariadb container image tag"
+    type: string
+    label: mariadb container image tag
+# SECRETS
+# mariadb
+- variable: mariadb-root-pass
+  required: true
+  description: "Password for MariaDB root user"
+  label: MariaDB Root Password
+  type: password
+  group: "Secrets"
+# seafile
+- variable: seafile-user
+  required: true
+  description: "User for Seafile"
+  label: Seafile User
+  type: password
+  group: "Secrets"
+- variable: seafile-pass
+  required: true
+  description: "Password for Seafile"
+  label: Seafile Password
+  type: password
+  group: "Secrets"
+# STORAGE
+- variable: volume.size
+  required: true
+  description: "Ammount of storage used for storing TLS certs, expressed in Mi, Gi, Ti"
+  label: Storage size
+  type: string
+  group: "Storage"
+  default: 1Ti
+# HOSTS
+- variable: host
+  required: true
+  description: "URL for miniflux"
+  label: URL for miniflux
+  type: string
+  group: "Hosts"
+# SELECTOR
+- variable: selector.key
+  required: true
+  description: "Key of the node label used to select the node were the pod will run"
+  label: Key of the node label used to select the node were the pod will run
+  type: string
+  group: "Selector"
+- variable: selector.value
+  required: true
+  description: "Value of the key"
+  label: Value of the key
+  type: string
+  group: "Selector"
