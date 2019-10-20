@@ -34,6 +34,15 @@ spec:
           - mountPath: /config
             name: {{ .Values.appName }}
             subPath: config
-          - mountPath: /data1
+          - mountPath: /storage
             name: {{ .Values.appName }}
             subPath: data
+          env:
+          - name: PUID
+            value: "1000"
+          - name: PGID
+            value: "1000"
+          - name: TZ
+            value: Europe/Madrid
+          - name: UMASK_SET
+            value: "022"
