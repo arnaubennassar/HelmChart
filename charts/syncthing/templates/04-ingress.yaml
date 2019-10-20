@@ -12,7 +12,7 @@ spec:
       - path: /
         backend:
           serviceName: {{ .Values.appName }}
-          servicePort: 443
+          servicePort: 8384
   tls:
     - hosts:
       - {{ .Values.host }}

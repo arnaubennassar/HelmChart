@@ -51,6 +51,8 @@ spec:
           ports:
           - name: seafile
             containerPort: 80
+          - name: sec
+            containerPort: 443
           env:
           - name: DB_HOST
             value: {{ .Values.appName }}
