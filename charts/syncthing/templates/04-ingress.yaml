@@ -13,6 +13,10 @@ spec:
         backend:
           serviceName: {{ .Values.appName }}
           servicePort: 8384
+      - path: /lis/
+        backend:
+          serviceName: {{ .Values.appName }}
+          servicePort: 22000
   tls:
     - hosts:
       - {{ .Values.host }}

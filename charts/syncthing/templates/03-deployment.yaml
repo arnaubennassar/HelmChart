@@ -44,5 +44,5 @@ spec:
             value: "1000"
           - name: TZ
             value: Europe/Madrid
-          - name: UMASK_SET
-            value: "022"
+          # - name: UMASK_SET
+          #   value: "022"
