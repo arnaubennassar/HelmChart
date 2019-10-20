@@ -9,9 +9,9 @@ spec:
   ports:
   - port: 8384
     targetPort: 8384
-    name: {{ .Values.appName }}
+    name: {{ .Values.appName }}-web
   - port: 22000
     targetPort: 22000
-    name: {{ .Values.appName }}
+    name: {{ .Values.appName }}-lis
   selector:
     k8s-app: {{ .Values.appName }}
