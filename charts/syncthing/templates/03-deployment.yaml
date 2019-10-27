@@ -33,10 +33,10 @@ spec:
           volumeMounts:
           - mountPath: /config
             name: {{ .Values.appName }}
-            subPath: {{ .Values.appName }}/config
+            subPath: config
           - mountPath: /storage
             name: {{ .Values.appName }}
-            subPath: {{ .Values.appName }}/data
+            subPath: data
           - mountPath: /backup
             name: {{ .Values.appName }}
             subPath: K8S_backup
