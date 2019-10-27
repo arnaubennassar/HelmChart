@@ -39,7 +39,7 @@ questions:
     type: string
     label: syncthing container image tag
 # STORAGE
-- variable: volume.pathsToBackup
+- variable: pathsToBackup
   required: true
   description: Array of directories from the volume to backup (will be included in /backup/{{app1}} dir) input example: ["app1", "app2/config"]
   label: Paths to backup
