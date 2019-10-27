@@ -38,14 +38,6 @@ questions:
     description: "syncthing container image tag"
     type: string
     label: syncthing container image tag
-# STORAGE
-- variable: pathsToBackup
-  required: true
-  description: Array of directories from the volume to backup (will be included in /backup/{{app1}} dir) input example: ["app1", "app2/config"]
-  label: Paths to backup
-  type: string
-  group: "Storage"
-  default: 1Ti
 - variable: volume.size
   required: true
   description: "Ammount of storage used for storing TLS certs, expressed in Mi, Gi, Ti"

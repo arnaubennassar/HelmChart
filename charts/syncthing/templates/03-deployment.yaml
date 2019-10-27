@@ -37,12 +37,10 @@ spec:
           - mountPath: /storage
             name: {{ .Values.appName }}
             subPath: {{ .Values.appName }}/data
-          {{- range $key, $value := .Values.pathsToBackup }}
-          - mountPath: /backup/{{ $value | quote }}
+          - mountPath: /backup
             name: {{ .Values.appName }}
-            subPath: {{ $value | quote }}/data
+            subPath: K8S_backup
             readOnly: true
-          {{- end }}
           env:
           - name: PUID
             value: "1000"
