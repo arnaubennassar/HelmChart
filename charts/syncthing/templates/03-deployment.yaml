@@ -33,10 +33,16 @@ spec:
           volumeMounts:
           - mountPath: /config
             name: {{ .Values.appName }}
-            subPath: config
+            subPath: {{ .Values.appName }}/config
           - mountPath: /storage
             name: {{ .Values.appName }}
-            subPath: data
+            subPath: {{ .Values.appName }}/data
+          {{- range $path := .Values.pathsToBackup }}
+          - mountPath: /backup/{{ .path }}
+            name: {{ .Values.appName }}
+            subPath: {{ .path }}/data
+            readOnly: true
+          {{- end }}
           env:
           - name: PUID
             value: "1000"
@@ -44,5 +50,3 @@ spec:
             value: "1000"
           - name: TZ
             value: Europe/Madrid
-          # - name: UMASK_SET
-          #   value: "022"

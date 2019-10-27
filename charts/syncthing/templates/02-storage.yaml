@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   glusterfs:
     endpoints: gluster
-    path: gluVol/{{ .Values.appName }}
+    path: gluVol
     readOnly: false
     type: "/v3/cluster/schemas/glusterfsVolumeSource"
 ---
