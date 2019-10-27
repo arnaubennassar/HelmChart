@@ -37,10 +37,10 @@ spec:
           - mountPath: /storage
             name: {{ .Values.appName }}
             subPath: {{ .Values.appName }}/data
-          {{- range $path := .Values.pathsToBackup }}
-          - mountPath: /backup/{{ .path }}
+          {{- range $key, $value := .Values.pathsToBackup }}
+          - mountPath: /backup/{{ $value | quote }}
             name: {{ .Values.appName }}
-            subPath: {{ .path }}/data
+            subPath: {{ $value | quote }}/data
             readOnly: true
           {{- end }}
           env:
