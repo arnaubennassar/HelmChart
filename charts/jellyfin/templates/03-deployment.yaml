@@ -23,7 +23,7 @@ spec:
         persistentVolumeClaim:
           claimName: {{ .Values.appName }}
       containers:
-# PLEX
+# JELLYFIN
         - name: {{ .Values.appName }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
           ports:
@@ -36,9 +36,6 @@ spec:
           - mountPath: /cache
             name: {{ .Values.appName }}
             subPath: jellyfin/cache
-          # - mountPath: /jellyfin/jellyfin-web
-          #   name: {{ .Values.appName }}
-          #   subPath: jellyfin/web
           - mountPath: /data
             name: {{ .Values.appName }}
             subPath: data
