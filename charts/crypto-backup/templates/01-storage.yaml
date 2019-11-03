@@ -58,3 +58,6 @@ spec:
   volumeName: {{ .Values.appName }}-from
   accessModes:
   - ReadOnlyMany
+  resources:
+    requests:
+      storage: {{ .Values.volumes.size }}
