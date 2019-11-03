@@ -26,3 +26,32 @@ spec:
   resources:
     requests:
       storage: {{ .Values.volume.size }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.appName }}-tobackup
+spec:
+  capacity:
+    storage: {{ .Values.volume.size }}
+  accessModes:
+  - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  glusterfs:
+    endpoints: gluster
+    path: gluVol/{{ .Values.tobackup }}
+    readOnly: false
+    type: "/v3/cluster/schemas/glusterfsVolumeSource"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.appName }}-tobackup
+  namespace: {{ .Values.namespace }}
+spec:
+  volumeName: {{ .Values.appName }}
+  accessModes:
+  - ReadOnlyMany
+  resources:
+    requests:
+      storage: {{ .Values.volume.size }}

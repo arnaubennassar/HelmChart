@@ -22,6 +22,9 @@ spec:
       - name: {{ .Values.appName }}
         persistentVolumeClaim:
           claimName: {{ .Values.appName }}
+      - name: {{ .Values.appName }}-tobackup
+        persistentVolumeClaim:
+          claimName: {{ .Values.appName }}
       containers:
         - name: {{ .Values.appName }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
@@ -38,8 +41,7 @@ spec:
             name: {{ .Values.appName }}
             subPath: data
           - mountPath: /backup
-            name: {{ .Values.appName }}
-            subPath: K8S_backup
+            name: {{ .Values.appName }}-tobackup
             readOnly: true
           env:
           - name: PUID
