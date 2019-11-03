@@ -45,6 +45,13 @@ questions:
   type: string
   group: "Storage"
   default: 1Ti
+- variable: tobackup
+  required: true
+  description: "Path to the backup directory"
+  label: Path to backup
+  type: string
+  group: "Storage"
+  default: crypto-backup
 # HOSTS
 - variable: host
   required: true
