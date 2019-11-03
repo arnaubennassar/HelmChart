@@ -5,9 +5,11 @@ metadata:
 type: Opaque
 stringData:
   key: {{ .Values.key }}
+
 ---
-kind: ConfigMap
+
 apiVersion: v1
+kind: ConfigMap
 metadata:
   name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}

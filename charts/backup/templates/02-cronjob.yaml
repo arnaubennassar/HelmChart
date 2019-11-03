@@ -18,7 +18,7 @@ spec:
               claimName: {{ .Values.appName }}-from
           - name: {{ .Values.appName }}-to
             persistentVolumeClaim:
-              claimName: {{ .Values.appName }}-to-
+              claimName: {{ .Values.appName }}-to
           - name: {{ .Values.appName }}-config
             configMap:
               name: {{ .Values.appName }}

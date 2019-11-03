@@ -13,7 +13,9 @@ spec:
     path: gluVol/{{ .Values.appName }}
     readOnly: false
     type: "/v3/cluster/schemas/glusterfsVolumeSource"
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -26,7 +28,9 @@ spec:
   resources:
     requests:
       storage: {{ .Values.volumes.size }}
+
 ---
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -42,7 +46,9 @@ spec:
     path: gluVol/{{ .Values.volumes.from }}
     readOnly: true
     type: "/v3/cluster/schemas/glusterfsVolumeSource"
+
 ---
+
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -51,4 +57,4 @@ metadata:
 spec:
   volumeName: {{ .Values.appName }}-from
   accessModes:
-  - ReadWriteOnce
+  - ReadOnlyOnce

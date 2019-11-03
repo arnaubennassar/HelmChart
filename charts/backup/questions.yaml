@@ -1,6 +1,5 @@
 categories:
-- Bot
-- DDNS
+- Backup
 questions:
 # NAMESPACE
 - variable: namespace
