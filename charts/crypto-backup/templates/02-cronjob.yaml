@@ -1,0 +1,42 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: changeip-cronjob
+  namespace: {{ .Values.namespace }}
+spec:
+  schedule: {{ .Values.cron }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          successfulJobsHistoryLimit: 1
+          failedJobsHistoryLimit: 2
+          restartPolicy: Never
+          volumes:
+          - name: {{ .Values.appName }}-from
+            persistentVolumeClaim:
+              claimName: {{ .Values.appName }}-from
+          - name: {{ .Values.appName }}-to
+            persistentVolumeClaim:
+              claimName: {{ .Values.appName }}-to
+          - name: {{ .Values.appName }}-config
+            configMap:
+              name: {{ .Values.appName }}
+          containers:
+          - name: {{ .Values.appName }}
+            image: arnaubennassar/crypto-backup
+            volumeMounts:
+            - mountPath: /output
+              name: {{ .Values.appName }}-to
+            - mountPath: /to-backup
+              name: {{ .Values.appName }}-from
+            - mountPath: /config
+              name: {{ .Values.appName }}-config
+            env:
+            - name: PREFIX
+              value: {{ .Values.prefix }}
+            - name: PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.appName }}
+                  key: key
