@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: changeip-cronjob
+  name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}
 spec:
   schedule: {{ .Values.cron }}
