@@ -37,7 +37,7 @@ metadata:
   name: {{ .Values.appName }}-from
 spec:
   capacity:
-    storage: {{ .Values.volume.size }}
+    storage: {{ .Values.volumes.size }}
   accessModes:
   - ReadOnlyOnce
   persistentVolumeReclaimPolicy: Retain

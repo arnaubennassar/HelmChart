@@ -16,7 +16,7 @@ questions:
   label: App name
   type: string
   group: "Configuration"
-  default: "backup"
+  default: "crypto-backup"
 # CONFIG
 - variable: config
   required: true
@@ -51,7 +51,6 @@ questions:
   label: Path to backup
   type: string
   group: "Storage"
-  default: ""
 # CRON
 - variable: cron
   required: true
