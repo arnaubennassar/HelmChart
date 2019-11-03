@@ -14,5 +14,4 @@ metadata:
   name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}
 data:
-  backup.list: |
-{{ .Values.config }}
+  backup.list: {{ .Values.config }}
