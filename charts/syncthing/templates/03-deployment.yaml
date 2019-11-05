@@ -24,7 +24,7 @@ spec:
           claimName: {{ .Values.appName }}
       - name: {{ .Values.appName }}-tobackup
         persistentVolumeClaim:
-          claimName: {{ .Values.appName }}
+          claimName: {{ .Values.appName }}-tobackup
       containers:
         - name: {{ .Values.appName }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
