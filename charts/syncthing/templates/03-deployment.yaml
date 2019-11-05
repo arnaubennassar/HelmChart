@@ -42,7 +42,6 @@ spec:
             subPath: data
           - mountPath: /backup
             name: {{ .Values.appName }}-tobackup
-            readOnly: true
           env:
           - name: PUID
             value: "1000"

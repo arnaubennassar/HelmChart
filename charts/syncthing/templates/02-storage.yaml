@@ -35,7 +35,7 @@ spec:
   capacity:
     storage: {{ .Values.volume.size }}
   accessModes:
-  - ReadOnlyMany
+  - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   glusterfs:
     endpoints: gluster
@@ -51,7 +51,7 @@ metadata:
 spec:
   volumeName: {{ .Values.appName }}-tobackup
   accessModes:
-  - ReadOnlyMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: {{ .Values.volume.size }}
