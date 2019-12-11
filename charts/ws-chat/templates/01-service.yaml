@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: {{ .Values.appName }}
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: {{ .Values.appName }}
+  selector:
+    k8s-app: {{ .Values.appName }}

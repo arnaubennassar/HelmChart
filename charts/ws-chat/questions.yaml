@@ -1,0 +1,46 @@
+categories:
+- media
+- streaming
+questions:
+# NAMESPACE
+- variable: namespace
+  required: true
+  description: "namespace"
+  label: namespace
+  type: string
+  group: "Configuration"
+  default: "default"
+# APP NAME
+- variable: appName
+  required: true
+  description: "App name used to reference the application across the resources"
+  label: App name
+  type: string
+  group: "Configuration"
+  default: "ws-chat"
+# IMAGE
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  - variable: image
+    default: "arnaubennassar/ws-chat"
+    description: "jellyfin container image"
+    type: string
+    label: jellyfin container image
+  - variable: imageTag
+    default: "0.1"
+    description: "ws-chat container image tag"
+    type: string
+    label: ws-chat container image tag
+# HOSTS
+- variable: host
+  required: true
+  description: "URL for ws-chat"
+  label: URL for ws-chat
+  type: string
+  group: "Hosts"
