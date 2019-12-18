@@ -1,0 +1,6 @@
+apiVersion: v1
+appVersion: "0.1"
+description: "Lychee"
+name: lychee
+version: 0.0.1
+icon: https://www.publicdomainpictures.net/pictures/150000/velka/dslr-camera.jpg
