@@ -28,7 +28,7 @@ questions:
   group: "Container Images"
   subquestions:
   - variable: image
-    default: "arnaubennassar/libp2p-relayt"
+    default: "arnaubennassar/libp2p-relay"
     description: "jellyfin container image"
     type: string
     label: jellyfin container image
