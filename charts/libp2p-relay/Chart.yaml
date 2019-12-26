@@ -2,5 +2,5 @@ apiVersion: v1
 appVersion: "1.0"
 description: Server to make connections possible over libp2p
 name: libp2p-relay
-version: 0.0.3
+version: 0.0.4
 icon: https://raw.githubusercontent.com/libp2p/libp2p/a13997787e57d40d6315b422afbe1ceb62f45511/logo/libp2p-logo.png

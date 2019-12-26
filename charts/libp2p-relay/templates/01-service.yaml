@@ -7,8 +7,8 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   ports:
-  - port: 2000
-    targetPort: 2000
+  - port: 80
+    targetPort: 80
     name: {{ .Values.appName }}
   selector:
     k8s-app: {{ .Values.appName }}
